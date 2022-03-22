@@ -19,7 +19,7 @@ public class Member extends BaseEntity {
     private Long mno;
     private String email;
     private String password;
-    private String nickName;
+    private String nickname;
     private boolean fromSocial;
     private LocalDate birthday;
 
@@ -32,5 +32,9 @@ public class Member extends BaseEntity {
     public void addMemberRole(MemberRole memberRole) {
         roleSet.add(memberRole);
     }
+
+    //회원정보를 수정하는 메소드
+    public void changePassword(String password) { this.password = password; }
+    public void changeNickname(String nickname) { this.nickname = nickname; }
 
 }

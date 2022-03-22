@@ -1,8 +1,10 @@
 package kijin.bang.keygenie;
 
+import kijin.bang.keygenie.dto.MemberDTO;
 import kijin.bang.keygenie.entity.Member;
 import kijin.bang.keygenie.entity.MemberRole;
 import kijin.bang.keygenie.repository.MemberRepository;
+import kijin.bang.keygenie.service.MemberService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,6 +20,8 @@ public class RepositoryTest {
     private MemberRepository memberRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private MemberService memberService;
 
     //@Test
     public void insertDummyData() {
@@ -31,7 +35,7 @@ public class RepositoryTest {
             Member member = Member.builder()
                     .email(name + "@study.hard")
                     .password(passwordEncoder.encode(name))
-                    .nickName(name)
+                    .nickname(name)
                     .fromSocial(false)
                     .birthday(LocalDate.parse(birthday))
                     .build();
@@ -47,14 +51,26 @@ public class RepositoryTest {
     }
 
     //@Test
-    public void testMno() {
+    public void testGetByMno() {
         Optional<Member> result = memberRepository.findByMno(94L, false);
         System.out.println(result.get());
     }
 
-    @Test
-    public void testEmail() {
+    //@Test
+    public void testGetByEmail() {
         Optional<Member> result = memberRepository.findByEmail("akdazzy@naver.com", false);
         System.out.println(result.get());
+    }
+
+    @Test
+    public void testRegisterMember() {
+        MemberDTO memberDTO = MemberDTO.builder()
+                .email("may@puppy.cute")
+                .password("1234")
+                .nickname("할미개")
+                .birthday("2008-07-23")
+                .build();
+        Long result = memberService.register(memberDTO);
+        System.out.println("registered Member\'s mno: " + result);
     }
 }

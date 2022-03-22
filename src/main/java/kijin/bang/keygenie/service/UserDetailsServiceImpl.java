@@ -34,7 +34,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                                 "ROLE_" + role.name()))
                         .collect(Collectors.toSet())
         );
-        authMember.setNickName(member.getNickName());
+        authMember.setNickName(member.getNickname());
         authMember.setFromSocial(member.isFromSocial());
         log.info(member);
         log.info(authMember);
