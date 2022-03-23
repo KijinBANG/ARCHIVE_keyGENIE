@@ -54,7 +54,7 @@
                 </div>
 
                 <div sec:authorize="isAuthenticated()" class="mb-5 px-4">
-                    <h3 class="h6 mb-3"><strong sec:authentication="principal.nickName"></strong>님 반갑습니다.</h3>
+                    <h3 class="h6 mb-3"><strong sec:authentication="principal.nickname"></strong>님 반갑습니다.</h3>
                     <div sec:authorize="hasRole('GUEST')">has GEUST Role</div>
                     <div sec:authorize="hasRole('MEMBER')">has MEMBER Role</div>
                     <div sec:authorize="hasRole('ADMIN')">has ADMIN Role</div>

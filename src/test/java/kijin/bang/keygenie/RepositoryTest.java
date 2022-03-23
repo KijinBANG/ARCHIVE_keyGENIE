@@ -58,11 +58,11 @@ public class RepositoryTest {
 
     //@Test
     public void testGetByEmail() {
-        Optional<Member> result = memberRepository.findByEmail("akdazzy@naver.com", false);
+        Optional<Member> result = memberRepository.findByEmail("akdazzy@naver.com");
         System.out.println(result.get());
     }
 
-    @Test
+    //@Test
     public void testRegisterMember() {
         MemberDTO memberDTO = MemberDTO.builder()
                 .email("may@puppy.cute")
@@ -72,5 +72,12 @@ public class RepositoryTest {
                 .build();
         Long result = memberService.register(memberDTO);
         System.out.println("registered Member\'s mno: " + result);
+    }
+
+    //@Test
+    public void emailToNickname() {
+        String email = "akdazzy@naver.com";
+        String nickname = email.substring(0, email.indexOf("@"));
+        System.out.println(nickname);
     }
 }

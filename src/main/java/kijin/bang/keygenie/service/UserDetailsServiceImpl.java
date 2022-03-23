@@ -22,9 +22,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.info("loadByUserName: " + username);
+        log.info("loadByUserName which means \'username\': " + username);
         //DB에서 username 에 해당하는 데이터 찾아오기
-        Member member = memberRepository.findByEmail(username, false).get();
+        Member member = memberRepository.findByEmail(username).get();
         //인증을 위한 클래스의 인스턴스를 생성
         AuthMember authMember = new AuthMember(
                 member.getEmail(),
@@ -34,10 +34,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                                 "ROLE_" + role.name()))
                         .collect(Collectors.toSet())
         );
-        authMember.setNickName(member.getNickname());
+        authMember.setNickname(member.getNickname());
         authMember.setFromSocial(member.isFromSocial());
-        log.info(member);
-        log.info(authMember);
+        log.info("member: " + member);
+        log.info("authMember: " + authMember);
         return authMember;
     }
 }

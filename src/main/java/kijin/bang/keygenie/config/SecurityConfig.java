@@ -1,5 +1,6 @@
 package kijin.bang.keygenie.config;
 
+import kijin.bang.keygenie.service.MemberOAuthUserService;
 import kijin.bang.keygenie.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -19,9 +20,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Log4j2
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    private final UserDetailsServiceImpl userDetailsServiceImpl;
+//    private final MemberOAuthUserService memberOAuthUserService;
+//    private final UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -79,7 +79,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
             .and()
                 .exceptionHandling()
-                .accessDeniedPage("/access-denied");
+                .accessDeniedPage("/access-denied")
+            .and()
+                .oauth2Login();
+//                .userInfoEndpoint()
+//                .userService(memberOAuthUserService);
 
         http.csrf().disable();
     }
