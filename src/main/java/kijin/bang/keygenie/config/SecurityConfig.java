@@ -40,23 +40,47 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+//        http.authorizeRequests()
+//                .antMatchers("/sample/all").permitAll()
+//                .antMatchers("/sample/guest").hasRole("GUEST")
+//                .antMatchers("/sample/member").hasRole("MEMBER")
+//                .antMatchers("/sample/admin").hasRole("ADMIN");
+//
+//        http.formLogin()
+//                .loginPage("/members/login")
+//                .defaultSuccessUrl("/")
+//                .usernameParameter("email")
+//                .failureUrl("/members/login/error")
+//                .and()
+//                .logout()
+//                .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
+//                .logoutSuccessUrl("/");
+//
+//        //REST API 를 사용하기 때문에, Cross Site Request Forgery 를 방지하기 위한 장치를 사용하지 않아도 보안에 문제가 없음!
+//        http.csrf()
+//                .ignoringAntMatchers("/register");
+        http
+            .authorizeRequests()
                 .antMatchers("/sample/all").permitAll()
                 .antMatchers("/sample/guest").hasRole("GUEST")
                 .antMatchers("/sample/member").hasRole("MEMBER")
-                .antMatchers("/sample/admin").hasRole("ADMIN");
-
-        http.formLogin()
+                .antMatchers("/sample/admin").hasRole("ADMIN")
+            .and()
+                .formLogin()
                 .loginPage("/members/login")
                 .defaultSuccessUrl("/")
                 .usernameParameter("email")
                 .failureUrl("/members/login/error")
-                .and()
+            .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/members/logout"))
-                .logoutSuccessUrl("/");
+                .deleteCookies("JSESSIONID")
+                .invalidateHttpSession(true)
+                .logoutSuccessUrl("/")
+            .and()
+                .exceptionHandling()
+                .accessDeniedPage("/access-denied");
 
-        //REST API 를 사용하기 때문에, Cross Site Request Forgery 를 방지하기 위한 장치를 사용하지 않아도 보안에 문제가 없음!
         http.csrf().disable();
     }
 
