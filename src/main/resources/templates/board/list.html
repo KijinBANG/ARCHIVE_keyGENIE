@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--layout 파일을 설정-->
+<th:block th:replace="~{/layout/base :: setContent(~{this::content} )}">
+    <!--layout 에 출력할 내용-->
+    <th:block th:fragment="content">
+        <div class="d-flex" id="wrapper">
+            <div th:replace="~{layout/spring :: side}"></div>
+            <div id="page-content-wrapper">
+                <div th:replace="~{layout/spring :: nav}"></div>
+                <div class="container-fluid">
+
+                    CONTENTS
+
+
+                </div>
+            </div>
+        </div>
+
+    </th:block>
+</th:block>
+
+</html>
