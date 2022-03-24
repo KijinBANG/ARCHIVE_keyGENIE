@@ -53,31 +53,31 @@ public class MemberOAuthUserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest)
             throws OAuth2AuthenticationException {
         String clientName = userRequest.getClientRegistration().getClientName();
-        log.info("clientName:" + clientName);
-        log.info("type of clientName:" + clientName.getClass().getTypeName());
+//        log.info("clientName:" + clientName);
+//        log.info("type of clientName:" + clientName.getClass().getTypeName());
 
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        oAuth2User.getAttributes().forEach((k, v) -> {
-            log.info("k:v := " + k + ":" + v);
-        });
-
-        log.info("I'm here! can you hear me? Let\'s check the problem.");
-        log.info("clientName.trim(): " + clientName.trim());
-        log.info("clientName.trim().toLowerCase(): " + clientName.trim().toLowerCase());
-        log.info("clientName.trim().toLowerCase().indexOf(\"kakao\"): " + clientName.trim().toLowerCase().indexOf("Kakao"));
-        log.info("clientName.trim().toLowerCase().indexOf(\"kakao\") >= 0: " + (clientName.trim().toLowerCase().indexOf("Kakao") >= 0));
+//        oAuth2User.getAttributes().forEach((k, v) -> {
+//            log.info("k:v := " + k + ":" + v);
+//        });
+//
+//        log.info("I'm here! can you hear me? Let\'s check the problem.");
+//        log.info("clientName.trim(): " + clientName.trim());
+//        log.info("clientName.trim().toLowerCase(): " + clientName.trim().toLowerCase());
+//        log.info("clientName.trim().toLowerCase().indexOf(\"kakao\"): " + clientName.trim().toLowerCase().indexOf("Kakao"));
+//        log.info("clientName.trim().toLowerCase().indexOf(\"kakao\") >= 0: " + (clientName.trim().toLowerCase().indexOf("Kakao") >= 0));
 
 
         String email = null;
         //구글에서 접속한 경우의 email을 가져오기
         if(clientName.trim().toLowerCase().indexOf("google") >= 0){
-            log.info("where?: Here is \'google\'");
+//            log.info("where?: Here is \'google\'");
             email = oAuth2User.getAttribute("email");
             log.info("email: " + email);
         }
         //카카오에서 접속한 경우의 email을 가져오기
         if(clientName.trim().toLowerCase().indexOf("kakao") >= 0){
-            log.info("where?: Here is \'Kakao\'");
+//            log.info("where?: Here is \'Kakao\'");
             Map<String, Object> kakaoAccount = (Map<String, Object>) oAuth2User.getAttribute("kakao_account");
             System.out.println("kakaoAccount: " + kakaoAccount);
 //            kakaoAccount.forEach((k, v) -> {

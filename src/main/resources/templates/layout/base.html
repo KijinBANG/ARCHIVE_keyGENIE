@@ -7,6 +7,13 @@
         <title>keyGENIE</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap core CSS -->
+        <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+        <!-- Custom styles for this template -->
+        <link th:href="@{/css/simple-sidebar.css}" rel="stylesheet">
+        <!-- Bootstrap core JavaScript -->
+        <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+        <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
         <link rel="stylesheet" href="/css/style.css">
         <script src="https://kit.fontawesome.com/d76f7371d8.js" crossorigin="anonymous"></script>
@@ -42,6 +49,9 @@
                         <a href="#"><span class="fa-brands fa-github mr-3"></span> Kijin's github</a>
                     </li>
                     <li>
+                        <a href="/spring/main"><span class="fa-solid fa-leaf mr-3"></span> Spring</a>
+                    </li>
+                    <li>
                         <a href="#"><span class="fa fa-paper-plane mr-3"></span> Contacts</a>
                     </li>
                 </ul>
@@ -75,7 +85,7 @@
         </nav>
 
         <!-- Page Content  -->
-        <div class="container-fluid">
+        <div style="width: 100%">
             <th:block th:replace="${content}"></th:block>
         </div>
 
