@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -41,6 +42,7 @@ public class MemberOAuthUserService extends DefaultOAuth2UserService {
                 .password(passwordEncoder.encode("social"))
                 .fromSocial(true)
                 .build();
+        member.addMemberRole(MemberRole.GUEST);
         member.addMemberRole(MemberRole.MEMBER);
         memberRepository.save(member);
         return member;
@@ -52,26 +54,45 @@ public class MemberOAuthUserService extends DefaultOAuth2UserService {
             throws OAuth2AuthenticationException {
         String clientName = userRequest.getClientRegistration().getClientName();
         log.info("clientName:" + clientName);
+        log.info("type of clientName:" + clientName.getClass().getTypeName());
 
         OAuth2User oAuth2User = super.loadUser(userRequest);
         oAuth2User.getAttributes().forEach((k, v) -> {
             log.info("k:v := " + k + ":" + v);
         });
 
-        //구글에서 접속한 경우의 email을 가져오기
+        log.info("I'm here! can you hear me? Let\'s check the problem.");
+        log.info("clientName.trim(): " + clientName.trim());
+        log.info("clientName.trim().toLowerCase(): " + clientName.trim().toLowerCase());
+        log.info("clientName.trim().toLowerCase().indexOf(\"kakao\"): " + clientName.trim().toLowerCase().indexOf("Kakao"));
+        log.info("clientName.trim().toLowerCase().indexOf(\"kakao\") >= 0: " + (clientName.trim().toLowerCase().indexOf("Kakao") >= 0));
+
+
         String email = null;
+        //구글에서 접속한 경우의 email을 가져오기
         if(clientName.trim().toLowerCase().indexOf("google") >= 0){
+            log.info("where?: Here is \'google\'");
             email = oAuth2User.getAttribute("email");
+            log.info("email: " + email);
+        }
+        //카카오에서 접속한 경우의 email을 가져오기
+        if(clientName.trim().toLowerCase().indexOf("kakao") >= 0){
+            log.info("where?: Here is \'Kakao\'");
+            Map<String, Object> kakaoAccount = (Map<String, Object>) oAuth2User.getAttribute("kakao_account");
+            System.out.println("kakaoAccount: " + kakaoAccount);
+//            kakaoAccount.forEach((k, v) -> {
+//                log.info("k:v := " + k + ":" + v);
+//            });
+            email = (String) kakaoAccount.get("email");
             log.info("email: " + email);
         }
 
         //저장
         Member member = saveSocialMember(email);
-        log.info("member: " + member);
-        log.info("member.getEmail(): " + member.getEmail());
-        log.info("member.getPassword(): " + member.getPassword());
-        log.info("member.getNickname(): " + member.getNickname());
-
+//        log.info("member: " + member);
+//        log.info("member.getEmail(): " + member.getEmail());
+//        log.info("member.getPassword(): " + member.getPassword());
+//        log.info("member.getNickname(): " + member.getNickname());
 
         //회원 가입한 데이터를 리턴
         AuthMember authMember = new AuthMember(
@@ -84,9 +105,9 @@ public class MemberOAuthUserService extends DefaultOAuth2UserService {
         );
         log.info("authMember: " + authMember);
         authMember.setEmail(member.getEmail());
-        authMember.setNickname((member.getNickname()));
+        authMember.setNickname(member.getNickname());
+        authMember.setFromSocial(member.isFromSocial());
         log.info("authMember_SET: " + authMember);
         return authMember;
     }
-
 }

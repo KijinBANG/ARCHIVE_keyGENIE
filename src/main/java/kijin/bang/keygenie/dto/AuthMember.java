@@ -17,27 +17,25 @@ import java.util.Map;
 @ToString
 public class AuthMember extends User implements OAuth2User {
     private String email;
+    private String password;
     private String nickname;
     private boolean fromSocial;
-
-    private String password;
 
     //속성 값을 읽어오기 위한 Map
     private Map<String, Object> attr;
 
-    public AuthMember(
-            String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public AuthMember(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
         this.email = username;
         this.password = password;
     }
 
-    public AuthMember(
-            String username, String password, Collection<? extends GrantedAuthority> authorities, Map<String, Object> attr) {
+    public AuthMember(String username, String password, Collection<? extends GrantedAuthority> authorities, Map<String, Object> attr) {
         super(username, password, authorities);
         this.attr = attr;
     }
 
+    //모든 속성의 값을 리턴하는 메소드
     @Override
     public Map<String, Object> getAttributes() {
         return this.attr;

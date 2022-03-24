@@ -7,6 +7,50 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link rel="stylesheet" href="/css/signinstyle.css">
     <script src="https://kit.fontawesome.com/d76f7371d8.js" crossorigin="anonymous"></script>
+
+<!--    <style>-->
+<!--        div.tooltip8084 {-->
+<!--            position: relative;-->
+<!--            display: inline-block;-->
+<!--        }-->
+
+<!--        div.tooltip8084 span.tooltiptext8084 {-->
+<!--            visibility: hidden;-->
+<!--            width: 120px;-->
+<!--            background-color: black;-->
+<!--            color: #fff;-->
+<!--            text-align: center;-->
+<!--            border-radius: 6px;-->
+<!--            padding: 5px 0;-->
+<!--            position: absolute;-->
+<!--            z-index: 1;-->
+<!--            transform: translate(-50%, -50%);-->
+<!--            bottom: 100%;-->
+<!--            left: 82%;-->
+<!--        }-->
+
+<!--        div {-->
+<!--            border-top-color: black;-->
+<!--            border-left-color: transparent;-->
+<!--            border-bottom-color: transparent;-->
+<!--            border-right-color: transparent;-->
+<!--        }-->
+
+<!--        div.tooltip8084 span.tooltiptext8084::after {-->
+<!--            content: "";-->
+<!--            position: absolute;-->
+<!--            top: 100%;-->
+<!--            left: 50%;-->
+<!--            border-width: 5px;-->
+<!--            border-style: solid;-->
+<!--            border-color: black transparent transparent transparent;-->
+<!--        }-->
+
+<!--        div.tooltip8084:hover span.tooltiptext8084 {-->
+<!--            visibility: visible;-->
+<!--        }-->
+<!--    </style>-->
+
 </head>
 <body>
 <section class="ftco-section">
@@ -23,12 +67,30 @@
                         <div class="w-100">
                             <h3 class="mb-4">Sign In</h3>
                         </div>
-                        <div class="w-100">
+                        <div class="w-100 row">
+<!--                            <p class="social-media d-flex justify-content-end">-->
+<!--                            <div class="tooltip8084 col">-->
+<!--                                <a href="/oauth2/authorization/google"-->
+<!--                                   class="social-icon d-flex align-items-center justify-content-center">-->
+<!--                                    <span class="fa-brands fa-google"></span>-->
+<!--                                    <span class="tooltiptext8084">Google Login</span>-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                            <div class="tooltip8084 col">-->
+<!--                                <a href="#"-->
+<!--                                   class="social-icon d-flex align-items-center justify-content-center">-->
+<!--                                    <span class="fa-solid fa-comment"></span>-->
+<!--                                    <span class="tooltiptext8084">카카오 Login</span>-->
+<!--                                </a>-->
+<!--                            </div>-->
+<!--                            </p>-->
                             <p class="social-media d-flex justify-content-end">
-                                <a href="/oauth2/authorization/google" class="social-icon d-flex align-items-center justify-content-center"><span
-                                        class="fa-brands fa-google"></span></a>
-                                <a href="#" class="social-icon d-flex align-items-center justify-content-center"><span
-                                        class="fa fa-twitter"></span></a>
+                                <a href="/oauth2/authorization/google" class="social-icon d-flex align-items-center justify-content-center">
+                                    <span class="fa-brands fa-google"></span>
+                                </a>
+                                <a href="/oauth2/authorization/kakao" class="social-icon d-flex align-items-center justify-content-center">
+                                    <span class="fa-solid fa-comment"></span>
+                                </a>
                             </p>
                         </div>
                     </div>
@@ -36,12 +98,14 @@
                         <div class="form-group">
                             <div class="icon d-flex align-items-center justify-content-center"><span
                                     class="fa fa-user"></span></div>
-                            <input type="email" name="email" class="form-control rounded-left" placeholder="email" required>
+                            <input type="email" name="email" class="form-control rounded-left" placeholder="email"
+                                   required>
                         </div>
                         <div class="form-group">
                             <div class="icon d-flex align-items-center justify-content-center"><span
                                     class="fa fa-lock"></span></div>
-                            <input type="password" name="password" id="password" class="form-control rounded-left" placeholder="Password" required>
+                            <input type="password" name="password" id="password" class="form-control rounded-left"
+                                   placeholder="Password" required>
                         </div>
                         <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
                         <div class="form-group row">
@@ -73,24 +137,28 @@
                     <div class="form-group mb-3">
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="fa-solid fa-envelope"></span></div>
-                        <input type="email" name="userEmail" class="form-control" placeholder="Enter email here..." required>
+                        <input type="email" name="userEmail" class="form-control" placeholder="Enter email here..."
+                               required>
                     </div>
                     <!-- password 입력 -->
                     <div class="form-group mb-3 password">
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="fa-solid fa-key"></span></div>
-                        <input type="password" class="form-control" name="userPassword" placeholder="Enter password here..." required>
+                        <input type="password" class="form-control" name="userPassword"
+                               placeholder="Enter password here..." required>
                     </div>
                     <div class="form-group mb-3 checkPW">
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="fa-solid fa-key"></span></div>
-                        <input type="password" class="form-control" name="checkPW" placeholder="Repeat password here...">
+                        <input type="password" class="form-control" name="checkPW"
+                               placeholder="Repeat password here...">
                     </div>
                     <!-- Nickname 입력 -->
                     <div class="form-group mb-3">
                         <div class="icon d-flex align-items-center justify-content-center"><span
                                 class="fa-solid fa-user-plus"></span></div>
-                        <input type="text" class="form-control" name="nickname" placeholder="Enter nickname here..." required>
+                        <input type="text" class="form-control" name="nickname" placeholder="Enter nickname here..."
+                               required>
                     </div>
                     <!-- Birthday 입력 -->
                     <div class="form-group mb-3">
@@ -123,7 +191,7 @@
     let inputBirthday = $('input[name="birthday"]')
 
 
-    $(".signin").on("click", function() {
+    $(".signin").on("click", function () {
         $('.modal-title').text("회원가입");
         inputEmail.val("");
         inputPassword.val("");
@@ -133,7 +201,7 @@
         $('.memberModal').modal('show');
     });
 
-    $(".passwordReset").on("click", function() {
+    $(".passwordReset").on("click", function () {
         $('.modal-title').text("비밀번호 재설정");
         inputEmail.val("");
         inputCheckPW.val("");
@@ -169,7 +237,7 @@
         }
         if (inputPassword.val() != inputCheckPW.val()) {
             $('.registerError').text("입력한 비밀번호가 서로 다릅니다.");
-        }else {
+        } else {
             $.ajax({
                 url: '/register',
                 type: "POST",
