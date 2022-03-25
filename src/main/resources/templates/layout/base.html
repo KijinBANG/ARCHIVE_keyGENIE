@@ -8,12 +8,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- Bootstrap core CSS -->
-        <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+<!--        <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">-->
         <!-- Custom styles for this template -->
         <link th:href="@{/css/simple-sidebar.css}" rel="stylesheet">
         <!-- Bootstrap core JavaScript -->
         <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-        <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<!--        <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>-->
         <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
         <link rel="stylesheet" href="/css/style.css">
         <script src="https://kit.fontawesome.com/d76f7371d8.js" crossorigin="anonymous"></script>
@@ -22,10 +22,9 @@
     <body>
 
     <div class="wrapper d-flex align-items-stretch">
-        <nav id="sidebar" class="order-last img" style="background-image: url('/images/bg_0.jpg');">
+        <nav id="sidebar" class="order-last img" style="background-image: url('/images/bg_1.jpg');">
             <div class="custom-menu">
-                <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                </button>
+                <button type="button" id="sidebarCollapse" class="btn btn-primary"></button>
             </div>
             <div class="">
                 <h1><a href="/" class="logo">keyGENIE <span>The architect for Everything</span></a></h1>
@@ -99,7 +98,27 @@
     <script src="/js/jquery.min.js"></script>
     <script src="/js/popper.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/main.js"></script>
+    <script>
+        (function ($) {
+
+            "use strict";
+
+            var fullHeight = function () {
+
+                $('.js-fullheight').css('height', $(window).height());
+                $(window).resize(function () {
+                    $('.js-fullheight').css('height', $(window).height());
+                });
+
+            };
+            fullHeight();
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+
+        })(jQuery);
+    </script>
 
     </body>
 </th:block>

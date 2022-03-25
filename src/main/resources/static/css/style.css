@@ -8327,8 +8327,8 @@ a[data-toggle="collapse"] {
   color: rgba(255, 255, 255, 0.8); }
 
 .form-control {
-  height: 40px !important;
-  background: #fff;
+  height: 40px;
+  /*background: #fff;*/
   color: #000;
   font-size: 13px;
   border-radius: 4px;

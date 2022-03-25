@@ -53,13 +53,13 @@ public class MemberOAuthUserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest)
             throws OAuth2AuthenticationException {
         String clientName = userRequest.getClientRegistration().getClientName();
-//        log.info("clientName:" + clientName);
-//        log.info("type of clientName:" + clientName.getClass().getTypeName());
+        log.info("clientName:" + clientName);
+        log.info("type of clientName:" + clientName.getClass().getTypeName());
 
         OAuth2User oAuth2User = super.loadUser(userRequest);
-//        oAuth2User.getAttributes().forEach((k, v) -> {
-//            log.info("k:v := " + k + ":" + v);
-//        });
+        oAuth2User.getAttributes().forEach((k, v) -> {
+            log.info("k:v := " + k + ":" + v);
+        });
 //
 //        log.info("I'm here! can you hear me? Let\'s check the problem.");
 //        log.info("clientName.trim(): " + clientName.trim());
@@ -86,6 +86,14 @@ public class MemberOAuthUserService extends DefaultOAuth2UserService {
             email = (String) kakaoAccount.get("email");
             log.info("email: " + email);
         }
+        //네이버에서 접속한 경우의 email을 가져오기
+        if(clientName.trim().toLowerCase().indexOf("naver") >= 0){
+            log.info("where?: Here is \'Naver\'");
+            Map<String, Object> response = (Map<String, Object>) oAuth2User.getAttribute("response");
+            System.out.println("response: " + response);
+            email = (String) response.get("email");
+            log.info("email: " + email);
+        }
 
         //저장
         Member member = saveSocialMember(email);
@@ -102,6 +110,24 @@ public class MemberOAuthUserService extends DefaultOAuth2UserService {
                                 new SimpleGrantedAuthority("ROLE_" + role.name()))
                         .collect(Collectors.toList()),
                 oAuth2User.getAttributes()
+        );
+        log.info("authMember: " + authMember);
+        authMember.setEmail(member.getEmail());
+        authMember.setNickname(member.getNickname());
+        authMember.setFromSocial(member.isFromSocial());
+        log.info("authMember_SET: " + authMember);
+        return authMember;
+    }
+
+    public OAuth2User loadUser(String email)
+            throws OAuth2AuthenticationException {
+        Member member = saveSocialMember(email);
+        AuthMember authMember = new AuthMember(
+                member.getEmail(),
+                member.getPassword(),
+                member.getRoleSet().stream().map(role ->
+                                new SimpleGrantedAuthority("ROLE_" + role.name()))
+                        .collect(Collectors.toList())
         );
         log.info("authMember: " + authMember);
         authMember.setEmail(member.getEmail());

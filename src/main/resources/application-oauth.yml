@@ -15,9 +15,21 @@ spring:
             authorization-grant-type: authorization_code
             scope: profile_nickname, account_email, birthday
             client-name: Kakao
+          naver:
+            client-id: WuglNjdFjDU3Wq27jFSn
+            cliendt-Secret: gj1ziRmoWw
+            redirect-uri: http://localhost/login/oauth2/naver
+            authorization-grant-type: authorization_code
+            scope: response_nickname, response_email, response_birthday
+            client-name: Naver
         provider:
           kakao:
             authorization_uri: https://kauth.kakao.com/oauth/authorize
             token_uri: https://kauth.kakao.com/oauth/token
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user_name_attribute: id
+          naver:
+            authorization_uri: https://nid.naver.com/oauth2.0/authorize
+            token_uri: https://nid.naver.com/oauth2.0/token
+            user-info-uri: https://openapi.naver.com/v1/nid/me
+            user_name_attribute: response

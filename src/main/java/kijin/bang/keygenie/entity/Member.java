@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,6 +23,8 @@ public class Member extends BaseEntity {
     private String nickname;
     private boolean fromSocial;
     private LocalDate birthday;
+    @OneToMany
+    private List<Board> board;
 
     //권한을 여러개 가질 수 있도록 설정
     @Builder.Default

@@ -42,8 +42,8 @@ dependencies {
     implementation group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5'
 
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-    implementation'com.google.code.gson:gson:2.8.7'
-    implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.12'
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.17'
 
 }
 
