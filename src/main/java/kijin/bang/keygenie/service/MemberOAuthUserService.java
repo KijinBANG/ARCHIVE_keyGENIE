@@ -119,21 +119,21 @@ public class MemberOAuthUserService extends DefaultOAuth2UserService {
         return authMember;
     }
 
-    public OAuth2User loadUser(String email)
-            throws OAuth2AuthenticationException {
-        Member member = saveSocialMember(email);
-        AuthMember authMember = new AuthMember(
-                member.getEmail(),
-                member.getPassword(),
-                member.getRoleSet().stream().map(role ->
-                                new SimpleGrantedAuthority("ROLE_" + role.name()))
-                        .collect(Collectors.toList())
-        );
-        log.info("authMember: " + authMember);
-        authMember.setEmail(member.getEmail());
-        authMember.setNickname(member.getNickname());
-        authMember.setFromSocial(member.isFromSocial());
-        log.info("authMember_SET: " + authMember);
-        return authMember;
-    }
+//    public OAuth2User loadUser(String email)
+//            throws OAuth2AuthenticationException {
+//        Member member = saveSocialMember(email);
+//        AuthMember authMember = new AuthMember(
+//                member.getEmail(),
+//                member.getPassword(),
+//                member.getRoleSet().stream().map(role ->
+//                                new SimpleGrantedAuthority("ROLE_" + role.name()))
+//                        .collect(Collectors.toList())
+//        );
+//        log.info("authMember: " + authMember);
+//        authMember.setEmail(member.getEmail());
+//        authMember.setNickname(member.getNickname());
+//        authMember.setFromSocial(member.isFromSocial());
+//        log.info("authMember_SET: " + authMember);
+//        return authMember;
+//    }
 }

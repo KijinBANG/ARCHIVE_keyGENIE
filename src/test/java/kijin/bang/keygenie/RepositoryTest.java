@@ -3,12 +3,11 @@ package kijin.bang.keygenie;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import kijin.bang.keygenie.dto.MemberDTO;
-import kijin.bang.keygenie.entity.GuestBook;
-import kijin.bang.keygenie.entity.Member;
-import kijin.bang.keygenie.entity.MemberRole;
-import kijin.bang.keygenie.entity.QGuestBook;
+import kijin.bang.keygenie.entity.*;
+import kijin.bang.keygenie.repository.BoardRepository;
 import kijin.bang.keygenie.repository.GuestBookRepository;
 import kijin.bang.keygenie.repository.MemberRepository;
+import kijin.bang.keygenie.repository.ReplyRepository;
 import kijin.bang.keygenie.service.MemberService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Random;
@@ -35,10 +34,10 @@ public class RepositoryTest {
     private MemberService memberService;
     @Autowired
     private GuestBookRepository guestBookRepository;
-//    @Autowired
-//    private BoardRepository boardRepository;
-//    @Autowired
-//    private ReplyRepository replyRepository;
+    @Autowired
+    private BoardRepository boardRepository;
+    @Autowired
+    private ReplyRepository replyRepository;
 //    @Autowired
 //    private ReviewRepository reviewRepository;
 
@@ -151,7 +150,7 @@ public class RepositoryTest {
         }
     }
 
-    @Test
+    //@Test
     //title 이나 content 에 1이 포함되어 있고
     //gno 의 값이 200보다 작은 데이터 조회
     public void testSelectQuery(){
@@ -178,25 +177,21 @@ public class RepositoryTest {
         }
     }
 
-//    //@Test
-//    public void insertBoards(){
-//        for(int i=1; i<=100; i=i+1){
-//            Member member = Member.builder()
-//                    .email("member"+i+"@study.hard")
-//                    .name("name"+i)
-//                    .fromSocial(false)
-//                    .password(passwordEncoder.encode("name"+i))
-//                    .build();
-//
-//            Board board = Board.builder()
-//                    .title("제목..." + i)
-//                    .content("내용..." + i)
-//                    .writer(member)
-//                    .build();
-//            boardRepository.save(board);
-//        }
-//    }
-//
+    @Test
+    public void insertBoards(){
+        Random r = new Random();
+        for(int i=1; i<=100; i=i+1){
+            Long num = 1 + Long.valueOf(r.nextInt(5));
+            Member member = memberRepository.findById(num).get();
+            Board board = Board.builder()
+                    .title("제목..." + i)
+                    .content("내용..." + i)
+                    .writer(member)
+                    .build();
+            boardRepository.save(board);
+        }
+    }
+
 //    //@Test
 //    public void insertReplys(){
 //        Random r = new Random();

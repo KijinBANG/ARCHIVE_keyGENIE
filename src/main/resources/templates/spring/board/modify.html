@@ -72,7 +72,7 @@
                             }
                             //form 의 데이터를 이용해서 Controller 로 이동
                             actionForm
-                                .attr("action", "/board/remove")
+                                .attr("action", "/spring/board/remove")
                                 .attr("method", "post");
                             actionForm.submit();
                         });
@@ -82,7 +82,7 @@
                                 return;
                             }
                             actionForm
-                                .attr("action", "/board/modify")
+                                .attr("action", "/spring/board/modify")
                                 .attr("method", "post")
                                 .submit();
                         });
@@ -103,7 +103,7 @@
 
                             //목록보기로 이동
                             actionForm
-                                .attr("action", "/board/list")
+                                .attr("action", "/spring/board/list")
                                 .attr("method", "get");
                             actionForm.submit();
                         })

@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 @Data
 @ToString
 @Builder
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class BoardDTO {
@@ -16,7 +17,7 @@ public class BoardDTO {
 
     //작성자 정보
     private String writerEmail;
-    private String writerName;
+    private String writerNickname;
 
     //작성된 날짜 와 수정된 날짜
     private LocalDateTime regDate;

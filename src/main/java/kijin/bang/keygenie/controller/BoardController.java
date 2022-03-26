@@ -1,10 +1,13 @@
 package kijin.bang.keygenie.controller;
 
 import kijin.bang.keygenie.dto.BoardDTO;
+import kijin.bang.keygenie.dto.MemberDTO;
 import kijin.bang.keygenie.dto.PageRequestDTO;
 import kijin.bang.keygenie.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,8 @@ public class BoardController {
 
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO, Model model){
+        log.info("pageRequestDTO: " + pageRequestDTO);
+        log.info("boardService.getList(pageRequestDTO): " + boardService.getList(pageRequestDTO));
         model.addAttribute(
                 "result",
                 boardService.getList(pageRequestDTO));
@@ -33,7 +38,10 @@ public class BoardController {
     }
 
     @PostMapping("/register")
-    public String register(BoardDTO boardDTO, RedirectAttributes rattr){
+    public String register(@AuthenticationPrincipal User user, BoardDTO boardDTO, RedirectAttributes rattr){
+        log.info("boardDTO: " + boardDTO);
+        log.info("user: " + user);
+        boardDTO.setWriterEmail(user.getUsername());
         Long bno = boardService.register(boardDTO);
         rattr.addFlashAttribute("msg", bno + " 등록");
         return "redirect:/spring/board/list";

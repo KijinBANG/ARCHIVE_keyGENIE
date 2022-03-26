@@ -17,7 +17,7 @@
                     <!--
                     <form th:action="@{/board/list}" th:method="post">
                     -->
-                    <form th:method="post">
+                    <form th:action="@{/spring/board/register}" th:method="post">
 
                         <!-- 제목 입력 -->
                         <div class="form-group">
@@ -32,11 +32,11 @@
                         </div>
 
                         <!-- 이메일 입력??? -->
-                        <div class="form-group">
-                            <label>Writer Email</label>
-                            <input type="email" class="form-control" name="writerEmail"
-                                   placeholder="Writer Email ">
-                        </div>
+<!--                        <div class="form-group">-->
+<!--                            <label>Writer Email</label>-->
+<!--                            <input type="email" class="form-control" name="writerEmail"-->
+<!--                                   placeholder="Writer Email ">-->
+<!--                        </div>-->
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
 

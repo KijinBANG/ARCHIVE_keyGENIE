@@ -14,10 +14,10 @@
                     <h1 class="mt-4">Board List Page
                         <!--삽입 링크 ' <div>이면 밑으로! <span>이면 옆으로!-->
                         <span aligh="right">
-                <a th:href="@{/spring/board/register}">
-                    <button type="button" class="btn btn-outline-primary">REGISTER</button>
-                </a>
-            </span>
+                            <a th:href="@{/spring/board/register}">
+                                <button type="button" class="btn btn-outline-primary">REGISTER</button>
+                            </a>
+                        </span>
                     </h1>
 
                     <!--기본 페이지 번호를 숨김으로 생성-->
@@ -25,7 +25,7 @@
 
                     <form action="/spring/board/list" method="get" id="searchForm">
                         <div class="input-group">
-                            <select class="custom-select col-2" name="type">
+                            <select class="form-control custom-select col-2" name="type">
                                 <option align='center' th:selected="${pageRequestDTO.type == null}">검색 조건</option>
                                 <option value="t" th:selected="${pageRequestDTO.type=='t'}">제목</option>
                                 <option value="c" th:selected="${pageRequestDTO.type=='c'}">내용</option>
@@ -54,18 +54,22 @@
                             <th scope="col">#</th>
                             <th scope="col">Title</th>
                             <th scope="col">Writer</th>
-                            <th scope="col">Regdate</th>
+                            <th scope="col">ModDate</th>
                         </tr>
                         </thead>
                         <tbody>
+<!--                        [[${result}]]<br>-->
                         <!--내용 출력-->
                         <tr th:each="dto : ${result.dtoList}">
+<!--                            [[${dto}]]<br>-->
                             <!-- 글번호 -->
                             <th scope="row">
                                 <!-- 상세보기 링크 : 여기서 글번호에 걸었지만, 제목에 걸어도 좋다!-->
                                 <a th:href="@{/spring/board/read(bno = ${dto.bno}, page= ${result.page}, type=${pageRequestDTO.type}, keyword = ${pageRequestDTO.keyword})}">
                                     [[${dto.bno}]]
                                 </a>
+<!--                                [[${dto.title}]]<br>-->
+<!--                                [[${dto.replyCount}]]<br>-->
                             </th>
                             <!-- 글제목과 댓글 수를 출력 -->
                             <td>
@@ -78,15 +82,15 @@
                                     </tr>
                                 </table>
                                 -->
-                                [[${dto.title}]] <font size="x-small" color="#a9a9a9"> [<b
-                                    th:text="${dto.replyCount}"></b>] </font>
+                                [[${dto.title}]] <small style="color: #a9a9a9"> [<b
+                                    th:text="${dto.replyCount}"></b>] </small>
                             </td>
-
                             <!-- 작성자 이름과 이메일 출력 : 둘 다 출력할 필요가 있을까?@,.@ -->
-                            <td>[[${dto.writerName}]] <small>[[${dto.writerEmail}]]</small></td>
+                            <td>[[${dto.writerNickname}]] <small>[[${dto.writerEmail}]]</small></td>
                             <!-- 작성일을 출력 : 다 출력해야하나? 예를들어, 오늘작성한 글은 시간을 보여주고, 그 전에 출력한 글들은 날짜를 보여주고! 어때?ㅋ -->
-                            <td>[[${#temporals.format(dto.regDate, 'yyyy/MM/dd')}]]</td>
+                            <td>[[${#temporals.format(dto.modDate, 'yyyy/MM/dd')}]]</td>
                         </tr>
+
                         </tbody>
                     </table>
 
@@ -152,7 +156,6 @@
                             searchForm.empty().submit();
                         });
                     </script>
-
 
                 </div>
             </div>

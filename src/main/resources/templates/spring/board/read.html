@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label>Writer</label>
-                        <input type="text" class="form-control" name="writer" th:value="${dto.writerName}" readonly>
+                        <input type="text" class="form-control" name="writer" th:value="${dto.writerNickname}" readonly>
                     </div>
                     <div class="form-group">
                         <label>RegDate</label>
@@ -41,12 +41,12 @@
                     </div>
 
                     <!-- '수정 또는 삭제' 와 '목록' 버튼 -->
-                    <a th:href="@{/board/modify(bno = ${dto.bno}, page=${requestDTO.page}, type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
+                    <a th:href="@{/spring/board/modify(bno = ${dto.bno}, page=${requestDTO.page}, type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
                         <button type="button" class="btn btn-primary">수정 또는 삭제</button>
                     </a>
 
                     <!--  -->
-                    <a th:href="@{/board/list(page=${requestDTO.page}, type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
+                    <a th:href="@{/spring/board/list(page=${requestDTO.page}, type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
                         <button type="button" class="btn btn-info">목록</button>
                     </a>
 
@@ -58,7 +58,7 @@
                             <h5><span class="badge badge-secondary replyCount">댓글 수 [[${dto.replyCount}]]</span></h5>
                         </div>
                         <!-- 댓글 내용을 입력할 영역을 확보(이 영역은 java 나 Spring 이랑 아무 상관 없다!)
-                         즉, JSON 데이터만 잘 받아오면! backend 영역에 대한 지식 없어서 작업이 가능하다! -->
+                         즉, JSON 데이터만 잘 받아오면! backend 영역에 대한 지식 없어도 작업이 가능하다! -->
                         <div class="list-group replyList"></div>
                     </div>
 
@@ -69,7 +69,7 @@
 
                                 <!-- header -->
                                 <div class="modal-header">
-                                    <h5 class="modal-title">동적으로 바뀌도록!</h5>
+                                    <h5 class="modal-title"></h5>
                                     <button type="button" class="close" data-dismiss="modal" arialabel="Close">
                                         <span aria-hidden="true">&times;</span></button>
                                 </div>
@@ -104,6 +104,8 @@
                     <script th:inline="javascript">//'$'가 포함된 코드는 jQuery
 
                     var bno = [[${dto.bno}]];//Java의 데이터를 Javascript 변수에 바로 대입
+                    let flag = false;
+
 
                     //문서를 전부 읽고 나면
                     $(document).ready(function () {
@@ -113,9 +115,17 @@
 
                         //댓글 개수 부분을 클릭하면
                         $(".replyCount").click(function () {
-                            //code 가 잘 동작하는지 확인한 수 주석처리!
-                            //alert('클릭')
-                            loadJSONData();
+                            if(flag) {
+                                listGroup.text("");
+                                flag = false;
+                            }
+                            else {
+                                //code 가 잘 동작하는지 확인한 수 주석처리!
+                                //alert('클릭')
+                                loadJSONData();
+                                flag = true
+                            }
+
                         });
                         //댓글이 추가될 영역
                         var listGroup = $(".replyList");
@@ -130,7 +140,7 @@
                         //특정한 게시글의 댓글을 처리하는 함수
                         function loadJSONData() {
                             //get 방식으로 ajax 요청
-                            $.getJSON('/replies/board/' + bno, function (arr) {
+                            $.getJSON('/spring/replies/board/' + bno, function (arr) {
                                 /*
                                 //데이터 잘 오는직 확인하자! 확인 후 주석처리!!
                                 console.log(arr);
@@ -164,12 +174,13 @@
                         var modal = $('.modal');
                         //'addReply'라 이름지은 영역을 클릭하면!
                         $(".addReply").click(function () {
-                            modal.modal('show');
+                            $(".modal-title").text("댓글 작성")
                             //댓글 입력하는 부분 초기화 시키기
                             $('input[name="replyText"]').val('');
                             $('input[name="replyer”]').val('');
                             $(".modal-footer .btn").hide(); //'modal' 내의 모든 버튼을 안 보이도록
                             $(".replySave, .replyClose").show(); //필요한 버튼들만 보이도록
+                            modal.modal('show');
                         });
 
                         $(".replySave").click(function () {
@@ -182,7 +193,7 @@
 
                             //ajax 활용
                             $.ajax({
-                                url: '/replies/',
+                                url: '/spring/replies/',
                                 method: 'post',
                                 data: JSON.stringify(reply),
                                 contentType: 'application/json; charset=utf-8', dataType: 'json',
@@ -209,6 +220,7 @@
                             alert(rno);
                              */
                             //기존 데이터를 대화 상자에 출력 (지울때는 rno 로 지우고, 수정할때는 세 정보 모두 필요!)
+                            $(".modal-title").text("댓글 수정")
                             $("input[name='replyText']").val($(this).find('.card-title').html());
                             $("input[name='replyer']").val($(this).find('.card-subtitle').html());
                             $("input[name='rno']").val(rno);
@@ -221,7 +233,7 @@
                         $(".replyRemove").on("click", function () {
                             var rno = $("input[name='rno']").val(); //모달창에 보이는 댓글 번호로 hidden 처리되어 있음
                             $.ajax({
-                                url: '/replies/' + rno,//하나뿐이니 '/'뒤에 바로 주자!
+                                url: '/spring/replies/' + rno,//하나뿐이니 '/'뒤에 바로 주자!
                                 method: 'delete',//예전에는 'post'로 보냈지만, 요즘은 'delete'로 보낸다! 기억!
                                 //dataType: 'json',//삭제/수정할 때 'json'으로 주자!(이 경우 굳이 필요 없다!)
                                 success: function (result) {
@@ -252,7 +264,7 @@
                             console.log(reply);
                              */
                             $.ajax({
-                                url: '/replies/' + rno,
+                                url: '/spring/replies/' + rno,
                                 method: 'put',//수정일 경우 method Type = 'put' 기억!
                                 data: JSON.stringify(reply),
                                 contentType: 'application/json; charset=utf-8',
