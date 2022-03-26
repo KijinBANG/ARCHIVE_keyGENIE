@@ -177,7 +177,7 @@ public class RepositoryTest {
         }
     }
 
-    @Test
+    //@Test
     public void insertBoards(){
         Random r = new Random();
         for(int i=1; i<=100; i=i+1){
@@ -190,6 +190,12 @@ public class RepositoryTest {
                     .build();
             boardRepository.save(board);
         }
+    }
+
+    @Test
+    public void addMemberRole() {
+        Member member = memberRepository.getById(6L);
+        System.out.println(member);
     }
 
 //    //@Test
