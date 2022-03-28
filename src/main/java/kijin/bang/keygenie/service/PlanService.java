@@ -14,15 +14,16 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public interface PlanService {
+
     Long register(PlanDTO planDTO);
 
     PageResponseDTO<PlanDTO, Object[]> getList(PageRequestDTO requestDTO);
 
     List<PlanDTO> getOnlyPlanList();
 
-    void modifyPlan(PlanDTO planDTO);
+    PlanDTO modifyPlan(PlanDTO planDTO);
 
-    void removePlan(Long pno);
+    Long removePlan(Long pno);
 
     PlanDTO getPlan(Long pno);
 
@@ -34,9 +35,6 @@ public interface PlanService {
                 .title(planDTO.getTitle())
                 .description(planDTO.getDescription())
                 .location(planDTO.getLocation())
-                .grade(planDTO.getGrade())
-                .start(planDTO.getStart() == null ? null : LocalDateTime.parse(planDTO.getStart()))
-                .end(planDTO.getEnd() == null ? null : LocalDateTime.parse(planDTO.getEnd()))
                 .build();
         entityMap.put("plan", plan);
 
@@ -59,15 +57,11 @@ public interface PlanService {
     }
 
     default PlanDTO entitiesToDTO(Plan plan, List<PlanImage> planImages, double avg, long reviewCnt) {
-
         PlanDTO planDTO = PlanDTO.builder()
                 .id(plan.getPno())
                 .title(plan.getTitle())
                 .description(plan.getDescription())
                 .location(plan.getLocation())
-                .grade(plan.getGrade())
-                .start(plan.getStart() == null ? null : plan.getStart().toString())
-                .end(plan.getEnd() == null ? null : plan.getEnd().toString())
                 .regDate(plan.getRegDate())
                 .modDate(plan.getModDate())
                 .build();
@@ -97,9 +91,6 @@ public interface PlanService {
                 .title(plan.getTitle())
                 .description(plan.getDescription())
                 .location(plan.getLocation())
-                .grade(plan.getGrade())
-                .start(plan.getStart().toString())
-                .end(plan.getEnd().toString())
                 .regDate(plan.getRegDate())
                 .modDate(plan.getModDate())
                 .build();

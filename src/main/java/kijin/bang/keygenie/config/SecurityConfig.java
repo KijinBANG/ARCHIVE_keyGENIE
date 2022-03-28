@@ -62,7 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 .antMatchers("/sample/all").permitAll()
-                .antMatchers("/sample/guest").hasRole("GUEST")
+                .antMatchers("/sample/guest/**").hasRole("GUEST")
+                .antMatchers("/spring/board/**").hasRole("GUEST")
                 .antMatchers("/sample/member").hasRole("MEMBER")
                 .antMatchers("/sample/admin").hasRole("ADMIN")
             .and()

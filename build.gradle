@@ -45,6 +45,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.17'
 
+    implementation group: 'com.twelvemonkeys.imageio', name: 'imageio-jpeg', version: '3.4.1'
+
 }
 
 tasks.named('test') {

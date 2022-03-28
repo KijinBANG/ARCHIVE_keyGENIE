@@ -89,6 +89,7 @@ public class BoardServiceImpl implements BoardService{
     //BoardDTO 를 BoardENTITY 로 변환해주는 메소드
     Board dtoToEntity(BoardDTO boardDTO) {
         String email = boardDTO.getWriterEmail();
+        log.info("email: " + email);
         Long mno = memberRepository.findByEmail(email).get().getMno();
         Member member = Member.builder().mno(mno).build();
 

@@ -66,23 +66,25 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public void modifyPlan(PlanDTO planDTO) {
+    public PlanDTO modifyPlan(PlanDTO planDTO) {
         Optional<Plan> result = planRepository.findById(planDTO.getId());
         if(result.isPresent()) {
             Plan plan = result.get();
-            plan.changeEnd(LocalDateTime.parse(planDTO.getEnd()));
-            plan.changeStart(LocalDateTime.parse(planDTO.getStart()));
-            plan.changeGrade(planDTO.getGrade());
             plan.changeDescription(planDTO.getDescription());
             plan.changeLocation(planDTO.getLocation());
             plan.changeTitle(planDTO.getTitle());
+
             planRepository.save(plan);
+            return entityToDTO(plan);
+        }else {
+            return null;
         }
     }
 
     @Override
-    public void removePlan(Long pno) {
+    public Long removePlan(Long pno) {
         planRepository.deleteById(pno);
+        return pno;
     }
 
     @Override

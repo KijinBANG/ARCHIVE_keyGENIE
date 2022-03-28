@@ -25,9 +25,6 @@ public class PlanDTO {
     private String title;
     private String description;
     private String location;
-    private int grade;
-    private String start;
-    private String end;
 
     @Builder.Default
     private List<PlanImageDTO> imageDTOList = new ArrayList<>();
