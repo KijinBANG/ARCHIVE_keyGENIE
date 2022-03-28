@@ -30,7 +30,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="dto : ${result.dtoList}">
-<!--                            [[${dto}]]<br><br>-->
+                            [[${dto}]]<br><br>
 <!--                            [[${dto.id}]]<br><br>-->
 <!--                            [[${result.page}]]<br><br>-->
                             <th scope="row">
@@ -39,10 +39,9 @@
                                 </a>
                             </th>
                             <td>
-                                <img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}"
-                                     th:src="|/display?filename=${dto.imageDTOList[0].thumbnailURL}|">
-<!--                                [[${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}]]<br><br>-->
-<!--                                [[${dto.imageDTOList[0].thumbnailURL}]]<br><br>-->
+<!--                                [[${dto.imageDTOList[0] != null}]]-->
+                                <img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0] != null}"th:src="|/display?filename=${dto.imageDTOList[0].thumbnailURL}|">
+
                                 [[${dto.title}]]<small style="color: #a9a9a9;"> [<b
                                     th:text="${dto.reviewCnt}"></b>] </small>
                             </td>
@@ -72,6 +71,8 @@
                     </ul>
 
                     <script th:inline="javascript">
+                        let dtoList = [[${result.dtoList}]]
+                        console.log("dtoList: ", dtoList)
 
                     </script>
 

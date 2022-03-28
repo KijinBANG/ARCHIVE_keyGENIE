@@ -66,7 +66,7 @@
 
                     <div class="uploadResult">
                         <ul>
-                            <li th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}" th:each="planImage: ${dto.imageDTOList}" th:data-file="${planImage.getThumbnailURL()}">
+                            <li th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0] != null}" th:each="planImage: ${dto.imageDTOList}" th:data-file="${planImage.getThumbnailURL()}">
                                 <img th:if="${planImage.path != null}" th:src="|/display?filename=${planImage.getThumbnailURL()}|">
                             </li>
                         </ul>

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/spring/planner")
+@RequestMapping("/spring/calendar")
 @Log4j2
 @RequiredArgsConstructor
-public class PlannerController {
+public class CalendarController {
     private final PlanService planService;
 
     @GetMapping("/list")

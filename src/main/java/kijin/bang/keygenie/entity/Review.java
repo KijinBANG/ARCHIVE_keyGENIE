@@ -9,7 +9,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString(exclude = {"movie","member"})
+@ToString(exclude = {"plan","member"})
 public class Review extends BaseEntity {
 
     @Id
