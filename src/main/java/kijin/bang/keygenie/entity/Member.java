@@ -13,7 +13,8 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-@ToString(exclude = "board")
+//@ToString(exclude = "board")
+@ToString
 public class Member extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +24,8 @@ public class Member extends BaseEntity {
     private String nickname;
     private boolean fromSocial;
     private LocalDate birthday;
-    @OneToMany
-    private List<Board> board;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List<Board> board;
 
     //권한을 여러개 가질 수 있도록 설정
     @Builder.Default

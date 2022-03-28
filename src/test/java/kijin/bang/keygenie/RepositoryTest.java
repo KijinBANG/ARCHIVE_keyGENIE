@@ -4,10 +4,7 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import kijin.bang.keygenie.dto.MemberDTO;
 import kijin.bang.keygenie.entity.*;
-import kijin.bang.keygenie.repository.BoardRepository;
-import kijin.bang.keygenie.repository.GuestBookRepository;
-import kijin.bang.keygenie.repository.MemberRepository;
-import kijin.bang.keygenie.repository.ReplyRepository;
+import kijin.bang.keygenie.repository.*;
 import kijin.bang.keygenie.service.MemberService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.Random;
+import java.util.UUID;
+import java.util.stream.IntStream;
 
 @SpringBootTest
 public class RepositoryTest {
@@ -38,8 +37,12 @@ public class RepositoryTest {
     private BoardRepository boardRepository;
     @Autowired
     private ReplyRepository replyRepository;
-//    @Autowired
-//    private ReviewRepository reviewRepository;
+    @Autowired
+    private PlanRepository planRepository;
+    @Autowired
+    private PlanImageRepository planImageRepository;
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     //@Test
     public void insertDummyData() {
@@ -192,7 +195,7 @@ public class RepositoryTest {
         }
     }
 
-    @Test
+    //@Test
     public void addMemberRole() {
         Member member = memberRepository.getById(6L);
         System.out.println(member);
@@ -225,4 +228,43 @@ public class RepositoryTest {
 //        reviewRepository.deleteByMember(member);
 ////        memberRepository.deleteById(email);
 //    }
+
+    @Commit
+    @Transactional
+    //@Test
+    public void insertPlans() {
+        IntStream.rangeClosed(1,100).forEach(i -> {
+            Plan plan = Plan.builder().title("Plan is ..." +i).build();
+            System.out.println("------------------------------------------");
+            planRepository.save(plan);
+            int count = (int)(Math.random() * 5) + 1; //1,2,3,4
+            for(int j = 0; j < count; j++){
+                PlanImage planImage = PlanImage.builder()
+                        .uuid(UUID.randomUUID().toString())
+                        .plan(plan)
+                        .imgName("test"+j+".jpg").build();
+                planImageRepository.save(planImage);
+            }
+            System.out.println("===========================================");
+        });
+    }
+
+    @Test
+    public void insertPlanReviews() {
+        //200개의 리뷰를 등록
+        IntStream.rangeClosed(1, 200).forEach(i -> {
+            //Plan 번호
+            Long pno = (long) (Math.random() * 100) + 1;
+            //리뷰어 번호
+            Long mno = ((long) (Math.random() * 100) + 1);
+            Member member = Member.builder().mno(mno).build();
+            Review movieReview = Review.builder()
+                    .member(member)
+                    .plan(Plan.builder().pno(pno).build())
+                    .grade((int) (Math.random() * 5) + 1)
+                    .text("이 계획에 대한 느낌..." + i)
+                    .build();
+            reviewRepository.save(movieReview);
+        });
+    }
 }

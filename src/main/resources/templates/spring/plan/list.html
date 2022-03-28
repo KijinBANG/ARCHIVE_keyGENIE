@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--layout 파일을 설정-->
+<th:block th:replace="~{/layout/base :: setContent(~{this::content} )}">
+    <!--layout 에 출력할 내용-->
+    <th:block th:fragment="content">
+        <div class="d-flex" id="wrapper">
+            <div th:replace="~{layout/spring :: side}"></div>
+            <div id="page-content-wrapper">
+                <div th:replace="~{layout/spring :: nav}"></div>
+                <div class="container-fluid">
+
+                    <h1 class="mt-4">Plan List
+                        <span>
+                <a th:href="@{/spring/plan/register}">
+                    <button type="button" class="btn btn-outline-primary">REGISTER</button>
+                </a>
+            </span>
+                    </h1>
+<!--                    [[${result}]]<br><br>-->
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">average</th>
+                            <th scope="col">Register</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="dto : ${result.dtoList}">
+<!--                            [[${dto}]]<br><br>-->
+<!--                            [[${dto.id}]]<br><br>-->
+<!--                            [[${result.page}]]<br><br>-->
+                            <th scope="row">
+                                <a th:href="@{/spring/plan/read(id = ${dto.id}, page= ${result.page})}">
+                                    [[${dto.id}]]
+                                </a>
+                            </th>
+                            <td>
+                                <img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}"
+                                     th:src="|/display?filename=${dto.imageDTOList[0].thumbnailURL}|">
+<!--                                [[${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}]]<br><br>-->
+<!--                                [[${dto.imageDTOList[0].thumbnailURL}]]<br><br>-->
+                                [[${dto.title}]]<small style="color: #a9a9a9;"> [<b
+                                    th:text="${dto.reviewCnt}"></b>] </small>
+                            </td>
+                            <td><b>[[${dto.avg}]]</b></td>
+                            <td>[[${#temporals.format(dto.regDate,'yyyy/MM/dd')}]]</td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- 페이지 번호를 출력하는 부분 -->
+                    <ul class="pagination h-100 justify-content-center align-items-center">
+                        <!-- '이전' -->
+                        <li class="page-item " th:if="${result.prev}">
+                            <a class="page-link" th:href="@{/spring/plan/list(page= ${result.start -1}) }" tabindex="-1">Previous</a>
+                        </li>
+                        <!-- '현재 페이지 번호'가 속한 집합(10개) -> 현재 페이지 번호에는 링크를 설정하지 않음!(active를 주지 않는 내용 확인!)-->
+                        <li th:class=" 'page-item ' + ${result.page == page?'active':''} "
+                            th:each="page:${result.pageList}">
+                            <a class="page-link" th:href="@{/spring/plan/list(page = ${page})}">
+                                [[${page}]]
+                            </a>
+                        </li>
+                        <!-- '다음' -->
+                        <li class="page-item" th:if="${result.next}">
+                            <a class="page-link" th:href="@{/spring/plan/list(page= ${result.end + 1})}">Next</a>
+                        </li>
+                    </ul>
+
+                    <script th:inline="javascript">
+
+                    </script>
+
+                </div>
+            </div>
+        </div>
+
+    </th:block>
+</th:block>
+
+</html>

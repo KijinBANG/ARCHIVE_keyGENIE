@@ -106,6 +106,14 @@
                     var bno = [[${dto.bno}]];//Java의 데이터를 Javascript 변수에 바로 대입
                     let flag = false;
 
+                    /* 데이터 형식을 다루는 연습 */
+                    let regdate = [[${dto.regDate}]]
+                    console.log("typeof(regdate): ", typeof(regdate));
+                    console.log("regdate: ", regdate);
+                    let formatedRegDate = [[${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}]]
+                    console.log("typeof(formatedRegDate): ", typeof(formatedRegDate));
+                    console.log("formatedRegDate: ", formatedRegDate);
+
 
                     //문서를 전부 읽고 나면
                     $(document).ready(function () {
