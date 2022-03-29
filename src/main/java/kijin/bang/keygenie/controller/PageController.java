@@ -35,5 +35,10 @@ public class PageController {
 
     }
 
+    @GetMapping("/contacts/main")
+    public void contacts() {
+
+    }
+
 }
 

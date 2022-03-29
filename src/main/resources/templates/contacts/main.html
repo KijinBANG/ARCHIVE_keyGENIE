@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--layout 파일을 설정-->
+<th:block th:replace="~{/layout/base :: setContent(~{this::content} )}">
+    <!--layout 에 출력할 내용-->
+    <th:block th:fragment="content">
+
+        <div class="container-fluid">
+            <h2 class="mt-2 mb-3">keyGENIE 관리자에게 하고싶은 말을 전하세요.</h2>
+            <div class="container">
+                <h4>공사중</h4>
+                <h6>앞으로 할 일: <small>(중요도:중)</small></h6>
+                <ul>
+                    <li>일반 사용자가 'Contacts'버튼을 누르면 모달창이 OPEN -> 관리자에게 하고싶은 말을 남길 수 있도록!
+                    <li>관리자가 'Cpntacts'버튼을 누르면 지금까지 받은 메시지를 확인할 수 있는 테이블이 보여지도록!
+                    <li>테이블의 각 행을 클릭하면 답변메시지를 입력할 수 있고,
+                    <li>관리자의 답변은 일반 사용자가 로그인했을 때 확인 가능하도록 제작!
+                </ul>
+                <div class="ml-3 mt-3">
+                    <p> 우리 주변에 '물'이 많지만, 우리가 사용할 수 있는 '물'은 많지 않다. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                        et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                        aliquip
+                        ex
+                        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                        eu
+                        fugiat
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit
+                        anim id est laborum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
+                        et
+                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                        aliquip
+                        ex
+                        ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+                        eu
+                        fugiat
+                        nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                        mollit
+                        anim id est laborum.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </th:block>
+</th:block>
+</html>

@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--layout 파일을 설정-->
+<th:block th:replace="~{/layout/base :: setContent(~{this::content} )}">
+    <!--layout 에 출력할 내용-->
+    <th:block th:fragment="content">
+        <div class="d-flex" id="wrapper">
+            <div th:replace="~{layout/spring :: side}"></div>
+            <div id="page-content-wrapper">
+                <div th:replace="~{layout/spring :: nav}"></div>
+                <div class="container-fluid">
+
+                    <h1 class="mt-4">Information about Plans</h1>
+
+                    [[${dto}]]<br><br>
+
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" class="form-control" name="title" th:value="${dto.title}" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" name="description" th:value="${dto.description}"
+                               readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" class="form-control" name="location" th:value="${dto.location}" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Average of Star Ratings</label>
+                        <input type="text" class="form-control" name="avgStartPoint" th:value="${dto.avg}" readonly>
+                    </div>
+
+                    <style>
+                        .uploadResult {
+                            width: 100%;
+                            background-color: #818182;
+                            margin-top: 10px;
+                            border-radius: 7px;
+                        }
+
+                        .uploadResult ul {
+                            display: flex;
+                            flex-flow: row;
+                            justify-content: center;
+                            align-items: center;
+                            vertical-align: top;
+
+                        }
+
+                        .uploadResult ul li {
+                            list-style: none;
+                            padding: 10px;
+                            margin-left: 2em;
+                        }
+
+                        .uploadResult ul li img {
+                            width: 100px;
+                        }
+                    </style>
+
+                    <div class="uploadResult">
+                        <ul>
+                            <li th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0] != null}" th:each="planImage: ${dto.imageDTOList}" th:data-file="${planImage.getThumbnailURL()}">
+                                <img th:if="${planImage.path != null}" th:src="|/display?filename=${planImage.getThumbnailURL()}|">
+                            </li>
+                        </ul>
+                    </div>
+
+                    <br>
+
+                    <button type="button" class="btn btn-primary">
+                        Number of Reviews <span class="badge badge-light">[[${dto.reviewCnt}]]</span>
+                    </button>
+
+                    <button type="button" class="btn btn-info addReviewBtn">Register review</button>
+
+
+                    <!-- area for printing contents of REVIEWS -->
+                    <div class="list-group reviewList"></div>
+
+                    <!-- 리뷰를 위한 모달 창 -->
+                    <div class="reviewModal modal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Plan Review</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label>Writer</label>
+                                        <input type="text" class="form-control" name="email">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Star ratings<span class="grade"></span></label>
+                                        <div class='starrr'></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>review</label>
+                                        <input type="text" class="form-control" name="text" placeholder="Good Plan!">
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary reviewSaveBtn">Save</button>
+                                    <button type="button" class="btn btn-warning modifyBtn">Modify</button>
+                                    <button type="button" class="btn btn-danger removeBtn">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 원본 이미지를 위한 모달 창 -->
+                    <div class="imageModal modal " tabindex="-2" role="dialog">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Image</h5>
+
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        $(document).ready(function (e) {
+                            var grade = 0;
+                            var id = [[${dto.id}]];
+
+                            $('.starrr').starrr({
+                                rating: grade,
+                                change: function (e, value) {
+                                    console.log("-------------------");
+                                    if (value) {
+                                        console.log(value);
+                                        grade = value;
+                                    }
+                                }
+                            });
+
+                            let reviewModal = $(".reviewModal");
+                            let inputEmail = $('input[name="email"]');
+                            let inputText = $('input[name="text"]');
+
+                            $(".addReviewBtn").click(function () {
+                                inputEmail.val("");
+                                inputText.val("");
+                                $(".removeBtn, .modifyBtn").hide();
+                                $(".reviewSaveBtn").show();
+                                reviewModal.modal('show');
+                            });
+
+                            $('.reviewSaveBtn').click(function () {
+                                var data = {id: id, grade: grade, text: inputText.val(), email: inputEmail.val()};
+                                console.log(data);
+                                $.ajax({
+                                    url: '/spring/reviews/' + id,
+                                    type: "POST",
+                                    data: JSON.stringify(data),
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "text",
+                                    success: function (result) {
+                                        console.log("result: " + result);
+                                        self.location.reload();
+                                    }
+                                })
+                                reviewModal.modal('hide');
+                            });
+
+                            //페이지가 열리면 바로 리뷰 데이터들을 가져와서 사용한다.
+                            function getMovieReviews() {
+                                function formatTime(str) {
+                                    var date = new Date(str);
+                                    return date.getFullYear() + '/'
+                                        + (date.getMonth() + 1) + '/'
+                                        + date.getDate() + ' '
+                                        + date.getHours() + ':'
+                                        + date.getMinutes();
+                                }
+
+                                $.getJSON("/spring/reviews/" + id + "/list", function (arr) {
+                                    console.log("this is arr.", arr)
+
+                                    var str = "";
+
+                                    arr.sort(function (o1, o2) {
+                                        if (formatTime(o1.modDate) < formatTime(o2.modDate)) return 1;
+                                        if (formatTime(o1.modDate) > formatTime(o2.modDate)) return -1;
+                                        if (formatTime(o1.modDate) == formatTime(o2.modDate)) return 0;
+                                    });
+
+                                    $.each(arr, function (idx, review) {
+                                        console.log(review);
+                                        str += ' <div class="card-body" data-reviewnum=' + review.reviewNum + ' data-email=' + review.email + '>';
+                                        str += ' <h5>내용: <span class="card-title">' + review.text + '</span></h5>';
+                                        str += ' <h6>별점: <span class="card-subtitle">' + review.grade + '</h6>';
+                                        str += ' <h6>작성자: <span class="card-subtitle mb-2 text-muted">' + review.nickname + '</h6>';
+                                        str += ' <h6>작성시각: <span class="card-subtitle mb-2 text-muted">' + formatTime(review.regDate) + '</h6>';
+                                        str += ' <h6>수정시각: <span class="card-subtitle mb-2 text-muted">' + formatTime(review.modDate) + '</h6>';
+                                        str += ' </div>';
+                                    });
+
+                                    $(".reviewList").html(str);
+                                });
+                            }
+
+                            getMovieReviews();
+
+                            //리뷰 선택
+                            var reviewNum;
+
+                            $(".reviewList").on("click", ".card-body", function () {
+                                $(".reviewSaveBtn").hide();
+                                $(".removeBtn, .modifyBtn").show();
+                                var targetReview = $(this);
+                                console.log('targetReview[\'data\']: ', targetReview['data']);
+                                console.log('targetReview.data(): ', targetReview.data());
+                                reviewNum = targetReview.data("reviewnum");
+                                console.log("reviewNum: " + reviewNum);
+                                inputEmail.val(targetReview.data("email"));
+                                inputText.val(targetReview.find('.card-title').text());
+                                var grade = targetReview.find('.card-subtitle').html();
+
+                                $(".starrr a:nth-child(" + grade + ")").trigger('click');
+
+                                $('.reviewModal').modal('show');
+                            });
+
+
+                            $(".modifyBtn").on("click", function () {
+                                var data = {
+                                    reviewNum: reviewNum,
+                                    id: id,
+                                    grade: grade,
+                                    text: inputText.val(),
+                                    mid: inputEmail.val()
+                                };
+                                console.log(data);
+                                $.ajax({
+                                    url: '/spring/reviews/' + id + "/" + reviewNum,
+                                    type: "PUT",
+                                    data: JSON.stringify(data),
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "text",
+                                    success: function (result) {
+                                        console.log("result:" + result);
+                                        self.location.reload();
+                                    }
+                                });
+                                reviewModal.modal('hide');
+                            });
+
+                            $(".removeBtn").on("click", function () {
+                                var data = {reviewNum: reviewNum};
+                                console.log(data);
+                                $.ajax({
+                                    url: '/spring/reviews/' + id + "/" + reviewNum,
+                                    type: "DELETE",
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "text",
+                                    success: function (result) {
+                                        console.log("result:" + result);
+                                        self.location.reload();
+                                    }
+                                });
+                                reviewModal.modal('hide');
+                            });
+
+                            $(".uploadResult li").click(function () {
+                                var file = $(this).data('file');
+                                console.log(file);
+                                $('.imageModal .modal-body').html("<img style='width:100%' src='/display?filename=" + file + "&size=1' >");
+                                $(".imageModal").modal("show");
+                            });
+
+                        });
+
+                    </script>
+
+                </div>
+            </div>
+        </div>
+
+    </th:block>
+</th:block>
+
+</html>

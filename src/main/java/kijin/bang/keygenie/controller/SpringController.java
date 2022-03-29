@@ -13,8 +13,11 @@ public class SpringController {
     @GetMapping("/main")
     public void main() {}
 
-//    @GetMapping("/calendar/main")
-//    public void planner() {}
+    @GetMapping("/calendar/main")
+    public void planner() {}
+
+    @GetMapping("/security/main")
+    public void security() {}
 
 
 }

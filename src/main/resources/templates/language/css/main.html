@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--layout 파일을 설정-->
+<th:block th:replace="~{/layout/base :: setContent(~{this::content} )}">
+    <!--layout 에 출력할 내용-->
+    <th:block th:fragment="content">
+        <div class="d-flex" id="wrapper">
+            <div th:replace="~{layout/language :: side}"></div>
+            <div id="page-content-wrapper">
+                <div th:replace="~{layout/language :: nav}"></div>
+                <div class="container-fluid">
+                    <h2 class="mt-2 mb-3">Cascading Style Sheets</h2>
+                    <h4>알아두면 좋은 CSS tips</h4>
+                    <h6>작업 할 내용 목록</h6>
+                    <ul>
+                        <li>각 tip의 장/단점을 정리해서 정리할 수 있는 게시판을 각각 만들어 놓을 것!
+                        <li>이미지, pdf, csv, excel 등 다양한 형식의 파일을 제공할 수 있도록 만들자!
+                        <li>관련 내용 지속적으로 업데이트 할 것!
+                        <li>기타의 자료...
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+
+    </th:block>
+</th:block>
+
+</html>
