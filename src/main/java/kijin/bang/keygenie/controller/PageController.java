@@ -30,11 +30,6 @@ public class PageController {
 
     }
 
-    @GetMapping("/architecture/main")
-    public void architecture() {
-
-    }
-
     @GetMapping("/contacts/main")
     public void contacts() {
 

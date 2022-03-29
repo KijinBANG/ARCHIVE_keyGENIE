@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--layout 파일을 설정-->
+<th:block th:replace="~{/layout/base :: setContent(~{this::content} )}">
+    <!--layout 에 출력할 내용-->
+    <th:block th:fragment="content">
+        <div class="d-flex" id="wrapper">
+            <div th:replace="~{layout/presentation :: side}"></div>
+            <div id="page-content-wrapper">
+                <div th:replace="~{layout/presentation :: nav}"></div>
+                <div class="container-fluid">
+
+                    <h2 class="mt-2 mb-3">Works in Architectural Design Part.</h2>
+                    <div class="container">
+                        <div class="row">
+                            <table>
+                                <tr>
+                                    <td style="width: 400px;">
+                                        <video muted autoplay loop>
+                                            <source src="/images/anime_3d.mp4" type="video/mp4">
+                                            this browser does not support this kind of animation.
+                                        </video>
+                                    </td>
+                                    <td>
+                                        <!--&lt;!&ndash;                        <div id="content" class="p-4 p-md-5 pt-5">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;                        <div id="content" class="p-md-5 pt-5">&ndash;&gt;-->
+                                        <!--&lt;!&ndash;                        <div id="content" class="p-4 pt-5">&ndash;&gt;-->
+                                        <div class="ml-3">
+                                            <h4>제15회 아주건축전</h4>
+                                            <h6>주제: '물'박물관 <small>(총장상 수상)</small></h6>
+                                            <h6>개요: 3명<small>(본인 외 이응석, 김재희)</small>의 팀작업</h6>
+                                            <h6>역할:</h6>
+                                            <ul>
+                                                <li>Concept 기획 및 Story Board 제작
+                                                <li>3D Modeling & Simulation
+                                                <li>Web 기반 presentation
+                                            </ul>
+                                            <h6>Synopsis:</h6>
+                                            <div class="ml-3 mt-3">
+                                                <p> 우리 주변에 '물'이 많지만, 우리가 사용할 수 있는 '물'은 많지 않다. Lorem ipsum dolor sit
+                                                    amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                                                    ut labore
+                                                    et
+                                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                                    exercitation ullamco laboris nisi ut
+                                                    aliquip
+                                                    ex
+                                                    ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                                                    voluptate velit esse cillum dolore
+                                                    eu
+                                                    fugiat
+                                                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
+                                                    in culpa qui officia deserunt
+                                                    mollit
+                                                    anim id est laborum.</p>
+                                            </div>
+                                            <h6>앞으로 할 일:</h6>
+                                            <ul>
+                                                <li>위와 같은 형식으로, 자료를 정리하자!
+                                                <li>DB 에 넣을 수 있도록, 공통된 항목을 정리하여 DB 설계해서, 알고리즘으로 정보를 출력할 수 있도록!
+                                                <li>일련의 이미지는 어떻게 보여지는 것이 좋을지 고민 해 보자!
+                                            </ul>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </th:block>
+</th:block>
+
+</html>

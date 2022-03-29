@@ -195,10 +195,11 @@ public class RepositoryTest {
         }
     }
 
-    //@Test
+    @Test
     public void addMemberRole() {
-        Member member = memberRepository.getById(6L);
-        System.out.println(member);
+        Member member = memberRepository.getById(2L);
+        member.addMemberRole(MemberRole.MEMBER);
+        member.addMemberRole(MemberRole.ADMIN);
     }
 
 //    //@Test
@@ -249,7 +250,7 @@ public class RepositoryTest {
         });
     }
 
-    @Test
+    //@Test
     public void insertPlanReviews() {
         //200개의 리뷰를 등록
         IntStream.rangeClosed(1, 200).forEach(i -> {
