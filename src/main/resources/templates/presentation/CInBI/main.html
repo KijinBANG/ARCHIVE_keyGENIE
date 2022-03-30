@@ -11,22 +11,30 @@
                 <div th:replace="~{layout/presentation :: nav}"></div>
                 <div class="container-fluid">
 
-                    <h2 class="mt-2 mb-3">3D-Rendering Still Images</h2>
+                    <h2 class="mt-2 mb-3">CI & BI</h2>
 
                     <div class="btn-group" role="group">
-                        <a href="#" type="button" class="btn btn-primary SpaceBtn">Aqua Museum</a>
-                        <a href="#" type="button" class="btn btn-primary ">for Guest</a>
+                        <a href="#" type="button" class="btn btn-primary ANCBtnC">CI for 'Art&Craft - circle'</a>
+                        <a href="#" type="button" class="btn btn-primary ANCBtnB">for Guest</a>
                         <a href="#" type="button" class="btn btn-primary">for Member</a>
                         <a href="#" type="button" class="btn btn-primary">for Admin</a>
                     </div>
 
-                    <div id="myDiv"></div>
+                    <div id="myDiv1"></div>
+                    <div id="myDiv2"></div>
 
                     <script>
-                        $('.SpaceBtn').on('click', function() {
-                            fetch('/txt/space3D').then(function(response){
+                        $('.ANCBtnC').on('click', function() {
+                            fetch('/txt/artAndCraftCircle.txt').then(function(response){
                                 response.text().then(function(text){
-                                    $('#myDiv').html(text);
+                                    $('#myDiv1').html(text);
+                                })
+                            })
+                        });
+                        $('.ANCBtnB').on('click', function() {
+                            fetch('/txt/circle').then(function(response){
+                                response.text().then(function(text){
+                                    $('#myDiv1').html(text);
                                 })
                             })
                         });

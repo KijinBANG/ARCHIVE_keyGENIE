@@ -11,7 +11,7 @@
                 <div th:replace="~{layout/presentation :: nav}"></div>
                 <div class="container-fluid">
 
-                    <h2 class="mt-2 mb-3">3D-Rendering Still Images</h2>
+                    <h2 class="mt-2 mb-3">Panel Presentation</h2>
 
                     <div class="btn-group" role="group">
                         <a href="#" type="button" class="btn btn-primary SpaceBtn">Aqua Museum</a>
@@ -24,7 +24,7 @@
 
                     <script>
                         $('.SpaceBtn').on('click', function() {
-                            fetch('/txt/space3D').then(function(response){
+                            fetch('/txt/space').then(function(response){
                                 response.text().then(function(text){
                                     $('#myDiv').html(text);
                                 })

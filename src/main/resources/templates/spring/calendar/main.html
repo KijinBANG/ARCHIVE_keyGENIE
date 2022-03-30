@@ -5,6 +5,10 @@
 <th:block th:replace="~{/layout/base :: setContent(~{this::content} )}">
     <!--layout 에 출력할 내용-->
     <th:block th:fragment="content">
+        <link href='/css/main.css' rel='stylesheet'/>
+        <script src='/js/main.js'></script>
+        <script th:src="@{/js/starrr.js}"></script>
+        <link th:href="@{/css/starrr.css}" rel="stylesheet">
         <div class="d-flex" id="wrapper">
             <div th:replace="~{layout/spring :: side}"></div>
             <div id="page-content-wrapper">
@@ -13,8 +17,7 @@
                     <h2 class="mt-2 mb-3">Make your LIFE better</h2>
                     <h6>with our Planner.</h6>
 
-                    <link href='/css/main.css' rel='stylesheet'/>
-                    <script src='/js/main.js'></script>
+
                     <style>
                         /* 이 프로젝트에선 reboot.scss 라는 파일이 없는데, 그것때문에 알 수 없는 서식이 설정되어 아래의 코드를 추가! 없앨 수 없으려나? */
                         a {

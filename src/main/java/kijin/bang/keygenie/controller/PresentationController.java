@@ -35,6 +35,11 @@ public class PresentationController {
 
     }
 
+    @GetMapping("/CInBI/main")
+    public void ciNbi() {
+
+    }
+
     @GetMapping("/threeD/main")
     public void threeD() {
 
