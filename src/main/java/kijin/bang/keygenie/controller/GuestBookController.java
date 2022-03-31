@@ -31,6 +31,9 @@ public class GuestBookController {
 //        return "redirect:/guestbook/list";
 //    }
 
+    @GetMapping("/main")
+    public void main() {}
+
     @GetMapping("/list")
     public void list(PageRequestDTO pageRequestDTO, Model model){
         log.info("목록 보기 .....");

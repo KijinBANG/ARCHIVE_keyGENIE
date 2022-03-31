@@ -197,9 +197,12 @@ public class RepositoryTest {
 
     @Test
     public void addMemberRole() {
-        Member member = memberRepository.getById(2L);
+        Member member = memberRepository.findByMno(2L, false).get();
+        System.out.println(member);
         member.addMemberRole(MemberRole.MEMBER);
         member.addMemberRole(MemberRole.ADMIN);
+        System.out.println(member);
+        memberRepository.save(member);
     }
 
 //    //@Test

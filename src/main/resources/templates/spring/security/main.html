@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <!--layout 파일을 설정-->
 <th:block th:replace="~{/layout/base :: setContent(~{this::content} )}">
@@ -13,12 +13,18 @@
                 <div class="container-fluid">
                     <h2 class="mt-2 mb-3">Spring Boot Security</h2>
 
-                    <div class="btn-group" role="group">
-                        <a href="/sample/all" type="button" class="btn btn-primary ANCBtn">for All</a>
-                        <a href="/sample/guest" type="button" class="btn btn-primary">for Guest</a>
-                        <a href="/sample/member" type="button" class="btn btn-primary">for Member</a>
-                        <a href="/sample/admin" type="button" class="btn btn-primary">for Admin</a>
-                    </div>
+<!--                    <div class="btn-group" role="group">-->
+                        <a href="/sample/all" type="button" class="btn btn-primary mr-3">for All</a>
+                        <span sec:authorize="hasRole('GUEST')" id="isGUEST">
+                            <a href="/sample/guest" type="button" class="btn btn-primary mr-3">for Guest</a>
+                        </span>
+                        <span sec:authorize="hasRole('MEMBER')" id="isMEMBER">
+                            <a href="/sample/member" type="button" class="btn btn-primary mr-3">for Member</a>
+                        </span>
+                        <span sec:authorize="hasRole('ADMIN')" id="isADMIN">
+                            <a href="/sample/admin" type="button" class="btn btn-primary mr-3">for Admin</a>
+                        </span>
+<!--                    </div>-->
 
                     <div id="content" class="p-4 p-md-5 pt-5 col">
                         <h6>※ Security 개요</h6>
@@ -34,12 +40,9 @@
                             <li>사용방법
                                 <ul>
                                     <li>오른쪽 사이드바에 뜨는 권한을 확인
+                                    <li>접근 권한이 없으면, 버튼 자체가 보여지지 않도록!
                                     <li>위의 버튼을 클릭 해 보면서 기능이 잘 구현되었는지 확인
                                     <li>정식 배포 전에 전체 삭제해야할지? 아님 다른 방법을 고려해야할지?
-                                </ul>
-                            <li>해얄 할 작업
-                                <ul>
-                                    <li>접근 권한이 없어서 에러발생했을 때 뜨는 창 기획할 것!
                                 </ul>
                         </ol>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut

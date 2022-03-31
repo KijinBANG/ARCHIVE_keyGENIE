@@ -55,7 +55,8 @@
                         <a href="https://github.com/KijinBANG"><span class="fa-brands fa-github mr-3"></span> Kijin's github</a>
                     </li>
                     <li>
-                    <a href="/contacts/main"><span class="fa fa-paper-plane mr-3"></span> Contacts</a>
+<!--                    <a href="/contacts/main"><span class="fa fa-paper-plane mr-3"></span> Contacts</a>-->
+                        <a href="/spring/guestbook/list"><span class="fa fa-paper-plane mr-3"></span> Contacts</a>
                     </li>
                 </ul>
 
@@ -68,9 +69,9 @@
 
                 <div sec:authorize="isAuthenticated()" class="mb-5 px-4">
                     <h3 class="h6 mb-3"><strong sec:authentication="principal.nickname"></strong>님 반갑습니다.</h3>
-                    <div sec:authorize="hasRole('GUEST')">has GEUST Role</div>
-                    <div sec:authorize="hasRole('MEMBER')">has MEMBER Role</div>
-                    <div sec:authorize="hasRole('ADMIN')">has ADMIN Role</div>
+                    <div sec:authorize="hasRole('GUEST')" id="isGUEST">has GEUST Role</div>
+                    <div sec:authorize="hasRole('MEMBER')" id="isMEMBER">has MEMBER Role</div>
+                    <div sec:authorize="hasRole('ADMIN')" id="isADMIN">has ADMIN Role</div>
                     <div class="row ml-auto mr-auto mt-2" >
                         <a href="/members/logout" class="btn btn-primary col">로그아웃</a>
                     </div>

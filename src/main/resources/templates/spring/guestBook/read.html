@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <!--layout 파일을 설정-->
 <th:block th:replace="~{/layout/base :: setContent(~{this::content} )}">
     <!--layout 에 출력할 내용-->
     <th:block th:fragment="content">
-        <div class="d-flex" id="wrapper">
-            <div th:replace="~{layout/spring :: side}"></div>
-            <div id="page-content-wrapper">
-                <div th:replace="~{layout/spring :: nav}"></div>
+
                 <div class="container-fluid">
 
+                    <h1><br></h1>
+                    <h2 class="mt-2 mb-3">상세보기 페이지</h2>
+
                     <!-- 아래의 데이터가 모두 readonly -->
-                    <h1 class="mt-4">Guest Book Read Page</h1>
                     <div class="form-group">
                         <label>Gno</label>
                         <input type="text" class="form-control" name="gno" th:value="${dto.gno}" readonly>
@@ -41,17 +40,17 @@
                     </div>
 
                     <!-- 수정 또는 삭제 버튼 생성 -->
-                    <a th:href="@{/spring/guestbook/modify(gno = ${dto.gno}, page=${requestDTO.page}, type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
+                    <span sec:authorize="hasRole('ADMIN')" id="isADMIN">
+                        <a th:href="@{/spring/guestbook/modify(gno = ${dto.gno}, page=${requestDTO.page}, type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
                         <button type="button" class="btn btn-primary">수정 또는 삭제</button>
                     </a>
+                    </span>
                     <!-- 목록보기 버튼 생성 -->
                     <a th:href="@{/spring/guestbook/list(page=${requestDTO.page}, type=${requestDTO.type}, keyword =${requestDTO.keyword})}">
                         <button type="button" class="btn btn-info">목록</button>
                     </a>
 
                 </div>
-            </div>
-        </div>
 
     </th:block>
 </th:block>

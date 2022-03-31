@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--layout 파일을 설정-->
+<th:block th:replace="~{/layout/base :: setContent(~{this::content} )}">
+    <!--layout 에 출력할 내용-->
+    <th:block th:fragment="content">
+        <div class="d-flex" id="wrapper">
+            <div th:replace="~{layout/spring :: side}"></div>
+            <div id="page-content-wrapper">
+                <div th:replace="~{layout/spring :: nav}"></div>
+                <div class="container-fluid">
+                    <h2 class="mt-2 mb-3">JAVA Framework 인 Spring 을 사용한 Guestbook 개발일지</h2>
+                    <h4>우측 side-bar 의 'Contacts' 에서 시연해 보실 수 있습니다.</h4>
+                    <h6>작업 할 내용 목록</h6>
+                    <ul>
+                        <li>Project 의 Documentation (PDF 로 다운로드받을 수 있도록 설정!)
+                        <li>프로젝트 주안점 및 해당 코드
+                        <li>개발의 주안점
+                        <li>개발하면서 겪은 오류들 등등...
+                        <li>기타의 자료...
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+
+    </th:block>
+</th:block>
+
+</html>
