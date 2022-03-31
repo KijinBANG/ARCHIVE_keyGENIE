@@ -6,31 +6,42 @@
     <!--layout 에 출력할 내용-->
     <th:block th:fragment="content">
         <div class="d-flex" id="wrapper">
-            <div th:replace="~{layout/presentation :: side}"></div>
+            <div th:replace="~{layout/about :: side}"></div>
             <div id="page-content-wrapper">
-                <div th:replace="~{layout/presentation :: nav}"></div>
+                <div th:replace="~{layout/about :: nav}"></div>
                 <div class="container-fluid">
 
-                    <h2 class="mt-2 mb-3">Panel Presentation</h2>
+                    <h2 class="mt-2 mb-3">이 홈페이지에 대한 소개</h2>
+                    <h4>이 곳을 만든 철학은 다음과 같습니다.</h4>
+                    <div class="container mt-5">
+                        <div class="row">
+                            <div class="col">
+                                <h4>※ 생각이란?</h4>
 
-                    <div class="btn-group" role="group">
-                        <a href="#" type="button" class="btn btn-primary SpaceBtn">Aqua Museum</a>
-                        <a href="#" type="button" class="btn btn-primary ">for Guest</a>
-                        <a href="#" type="button" class="btn btn-primary">for Member</a>
-                        <a href="#" type="button" class="btn btn-primary">for Admin</a>
+                                <h6>TEXT</h6>
+                                <div class="ml-3 mt-3">
+                                    <p>글은 모든 생각의 바탕. 단순명료하게!</p>
+                                </div>
+
+                                <br>
+                                <h6>SKETCH <small>(단순한 낙서도 의미가 없지만은 않습니다.)</small></h6>
+                                <div class="box mb-2" style="background: #BDBDBD;" width="400" height="300">
+                                    <img class="profile mb-2" src="">
+                                </div>
+
+                                <br>
+                                <h6>저쩌구 <small>(어떠한 정보를 어떻게 배치할지 고민해보자!)</small></h6>
+                                <div class="box" style="background: #BDBDBD;" width="400" height="300">
+                                    <img class="profile" src="">
+                                </div>
+                                <div class="ml-3 mt-3">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
-
-                    <div id="myDiv"></div>
-
-                    <script>
-                        $('.SpaceBtn').on('click', function() {
-                            fetch('/txt/space').then(function(response){
-                                response.text().then(function(text){
-                                    $('#myDiv').html(text);
-                                })
-                            })
-                        });
-                    </script>
+                </div>
 
 
 

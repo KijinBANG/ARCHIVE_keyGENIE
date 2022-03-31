@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!--layout 파일을 설정-->
+<th:block th:replace="~{/layout/base :: setContent(~{this::content} )}">
+    <!--layout 에 출력할 내용-->
+    <th:block th:fragment="content">
+        <div class="d-flex" id="wrapper">
+            <div th:replace="~{layout/about :: side}"></div>
+            <div id="page-content-wrapper">
+                <div th:replace="~{layout/about :: nav}"></div>
+                <div class="container-fluid">
+
+                    <h2 class="mt-2 mb-3">Kijin Bang's Curriculum Vitae</h2>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-3">
+
+                            </div>
+                            <div class="col-9">
+                                <p>
+                                    While preparing for my master's thesis, I was able to recognize mathematics as an analysis tool and language for the first time. After that, I had a chance to work as a project manager for a national research project involving more than 20 universities, and my main task was to simplify a vast amount of data to make it easier to be evaluated and give feedback to each sub-research institute about that. As a result, I was very attracted to the simplicity and clarity of mathematics, so I decided to study various mathematical fields, and furthermore, I would like to develop various cases that can explain this more easily.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <H4>
+                                    Contact
+                                </H4>
+                                <B>Address</B><br>
+                                <Small>
+                                    Korea, Republic of
+                                    17-20, Sannam-ro 231beon-gil ,Paju-si
+                                </Small>
+                                <br>
+                                <B>Mobile</B><br>
+                                <Small>
+                                    (+)82-10-3058-8084
+                                </Small>
+                                <br>
+                                <B>email</B><br>
+                                <Small>
+                                    mr.kijin.bang@gmail.com
+                                </Small>
+
+                                <br>
+                                <br>
+                                <H4>
+                                    Scores
+                                </H4>
+                                <B>Language</B><br>
+                                English : TOEFL iBT(97)<br>
+                                <Small>
+                                    Reading: 27<br>
+                                    Listening: 24<br>
+                                    Speaking: 21<br>
+                                    Writing: 24<br>
+                                </Small>
+                                <B>Mathematics</B><br>
+                                GRE Subject Test<br>
+                                <Small>
+                                    Test Date : Sep. 11, 2021
+                                    Scaled Score : 850
+                                </Small>
+
+                            </div>
+                            <div class="col-9">
+                                <H4>
+                                    Career
+                                </H4>
+                                <B>An instructor at a private academy</B><br>
+                                Hokmah Edu, Il-san, Korea (2012 – 2020)
+                                <Small>
+                                    ‐ Won the competition for advanced math problem
+                                    <small>Korea Educational Broadcasting System or EBS</small><br>
+                                </Small>
+                                <br>
+                                <B>Technical Research personnel</B><br>
+                                Sustainable Building Research Center (2006 – 2011)
+                                <Small>
+                                    <ul>
+                                        <li>A Study on the Typological Classification of Super-tall Building and Present State of Masterplan Planning Factor in the Site
+                                            <br><small>2010.1071 - 76 (6 pages) | KCI | UCI(KEPA) : I410-ECN-0101-2015-600-001263762</small>
+                                        <li>Development of the Quality of Life Assessment Tool by the Green Growth based Approach
+                                            <br><small>2010.0973 - 80 (8 pages) | KCI | UCI(KEPA) : I410-ECN-0101-2012-540-003672131</small>
+                                        <li>A Study on the Architectural Planning Property and the Senses of Dweller on the Indoor Public Space of High-rise Mixed-use Buildings
+                                            <br><small>2009.1213 - 20 (8 pages)| KCI | UCI(KEPA) : I410-ECN-0101-2010-540-001686586</small>
+                                    </ul>
+                                </Small>
+                                <B>A part-time instructor at a university</B><br>
+                                Social science research methodology (2007 – 2008)<br>
+                                <Small>
+                                    Methodology for planning, surveying, and Analysis for Writing a Paper
+                                </Small>
+
+                                <br>
+                                <br>
+                                <H4>
+                                    Education
+                                </H4>
+                                <h6><B>Ph.D. Candidate in Architecture</B></h6>
+                                <B>Ajou University, Republic of Korea (2006 – 2008)</B><br>
+                                <Small>
+                                    Cumulative Grade Point Average (4.29/4.5)
+                                </Small>
+                                <h6><B>Master of Engineering</B></h6>
+                                <B>Ajou University, Republic of Korea (2004 – 2006)</B><br>
+                                <Small>
+                                    <ul>
+                                        <li>Cumulative Grade Point Average (4.38/4.5)
+                                        <li>A Study on the Present State of Information Flow and the Improvement Strategy in Management Business of Multi-Family Housing
+                                            <br><small>2006.1229 - 36 (8 pages) KCI | UCI(KEPA) : I410-ECN-0101-2009-540-017609614</small>
+                                    </ul>
+                                </Small>
+                                <h6><B>Bachelor of Engineering</B></h6>
+                                <B>Ajou University, Republic of Korea (1999 – 2004)</B><br>
+                                <Small>
+                                    <ul>
+                                        <li>Cumulative Grade Point Average (3.12/4.5)
+                                        <li>Korean Architecture Award 2005 (Selected work)
+                                        <li>SPACE GRAND PRIZE 2003 (Selected work)
+                                        <li>The 15th Ajou Architectural Exhibition (1st prize)
+                                    </ul>
+                                </Small>
+
+                                <br>
+                                <H4>
+                                    Certification
+                                </H4>
+                                <B>Engineer Architecture</B><br>
+                                Human Resources Development Service of Korea<br>
+                                <B>Assistant certified architect</B><br>
+                                Korea Institute of Registered Architects<br>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </th:block>
+</th:block>
+
+</html>

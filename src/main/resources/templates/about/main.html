@@ -11,61 +11,71 @@
                 <div th:replace="~{layout/about :: nav}"></div>
                 <div class="container-fluid">
 
-                    <h2 class="mt-2 mb-3">Works in Architectural Design Part.</h2>
-                    <div class="container">
-                        <div class="row">
-                            <table>
-                                <tr>
-                                    <td style="width: 400px;">
-                                        <video muted autoplay loop>
-                                            <source src="/images/anime_3d.mp4" type="video/mp4">
-                                            this browser does not support this kind of animation.
-                                        </video>
-                                    </td>
-                                    <td>
-                                        <!--&lt;!&ndash;                        <div id="content" class="p-4 p-md-5 pt-5">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;                        <div id="content" class="p-md-5 pt-5">&ndash;&gt;-->
-                                        <!--&lt;!&ndash;                        <div id="content" class="p-4 pt-5">&ndash;&gt;-->
-                                        <div class="ml-3">
-                                            <h4>제15회 아주건축전</h4>
-                                            <h6>주제: '물'박물관 <small>(총장상 수상)</small></h6>
-                                            <h6>개요: 3명<small>(본인 외 이응석, 김재희)</small>의 팀작업</h6>
-                                            <h6>역할:</h6>
-                                            <ul>
-                                                <li>Concept 기획 및 Story Board 제작
-                                                <li>3D Modeling & Simulation
-                                                <li>Web 기반 presentation
-                                            </ul>
-                                            <h6>Synopsis:</h6>
-                                            <div class="ml-3 mt-3">
-                                                <p> 우리 주변에 '물'이 많지만, 우리가 사용할 수 있는 '물'은 많지 않다. Lorem ipsum dolor sit
-                                                    amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                                                    ut labore
-                                                    et
-                                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                                    exercitation ullamco laboris nisi ut
-                                                    aliquip
-                                                    ex
-                                                    ea commodo consequat. Duis aute irure dolor in reprehenderit in
-                                                    voluptate velit esse cillum dolore
-                                                    eu
-                                                    fugiat
-                                                    nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt
-                                                    in culpa qui officia deserunt
-                                                    mollit
-                                                    anim id est laborum.</p>
-                                            </div>
-                                            <h6>앞으로 할 일:</h6>
-                                            <ul>
-                                                <li>위와 같은 형식으로, 자료를 정리하자!
-                                                <li>DB 에 넣을 수 있도록, 공통된 항목을 정리하여 DB 설계해서, 알고리즘으로 정보를 출력할 수 있도록!
-                                                <li>일련의 이미지는 어떻게 보여지는 것이 좋을지 고민 해 보자!
-                                            </ul>
-                                        </div>
+                    <style>
+                        .box {
+                            width: 240px;
+                            height: 180px;
+                            border-radius: 15px;
+                            overflow: hidden;
+                            box-shadow: 3px 3px 3px #c8c8c8;
+                        }
+                        .profile {
+                            object-fit: cover;
+                        }
+                    </style>
 
-                                    </td>
-                                </tr>
-                            </table>
+                    <h2 class="mt-2 mb-3">"좋은생각"에 오신것을 환영합니다.</h2>
+                    <h4>이 곳을 간략히 소개 해 드립니다.</h4>
+                    <h6>새로생긴 왼편의 side-bar 를 이용하여 더 자세한 정보를 확인하세요. <small>(창이 좁다면, 상단의 'Toggle'버튼으로 이용하세요.)</small></h6>
+                    <div class="container mt-5">
+                        <div class="row">
+                            <div class="col">
+                                <h4>※ 생각이란?</h4>
+
+                                <h6>TEXT</h6>
+                                <div class="ml-3 mt-3">
+                                    <p>글은 모든 생각의 바탕. 단순명료하게!</p>
+                                </div>
+
+                                <br>
+                                <h6>SKETCH <small>(단순한 낙서도 의미가 없지만은 않습니다.)</small></h6>
+                                <div class="box mb-2" style="background: #BDBDBD;" width="400" height="300">
+                                    <img class="profile mb-2" src="">
+                                </div>
+
+                                <br>
+                                <h6>저쩌구 <small>(어떠한 정보를 어떻게 배치할지 고민해보자!)</small></h6>
+                                <div class="box" style="background: #BDBDBD;" width="400" height="300">
+                                    <img class="profile" src="">
+                                </div>
+                                <div class="ml-3 mt-3">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore</p>
+                                </div>
+
+                            </div>
+                            <div class="col">
+                                <h4>※ 현실은 3차원, 그 이상!</h4>
+                                <h6>'생각' -> '현실'</h6>
+                                <ul>
+                                    <li>결과적으로 3차원 이상의 공간에서 결과물을 내어야 합니다.
+                                    <li>하지만, 3차원 이상의 공간을 상상하는 것은 어렵죠.
+                                    <li>따라서, 그것을 도와줄 수 있는 다양한 도구를 익혀야 합니다.
+                                </ul>
+                                <video muted autoplay loop height="300" width="200">
+                                    <source src="/images/anime_3d.mp4" type="video/mp4">
+                                    this browser does not support this kind of animation.
+                                </video><br>
+                                <small>
+                                    <b>※ 사용한 도구:</b>
+                                    <ul>
+                                        <li> 3D Modeling Tool: <b>form Z</b>
+                                        <li> Mapping & Rendering Tool: <b>V-ray</b>
+                                        <li> Video editing Tool: <b>Adobe Premiere</b>
+                                    </ul>
+                                </small>
+
+                            </div>
+                        </div>
                         </div>
                     </div>
 

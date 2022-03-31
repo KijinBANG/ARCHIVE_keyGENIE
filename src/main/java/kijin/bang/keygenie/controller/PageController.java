@@ -30,6 +30,21 @@ public class PageController {
 
     }
 
+    @GetMapping("/about/thisHP/main")
+    public void thisHP() {
+
+    }
+
+    @GetMapping("/about/theArtOfThinking/main")
+    public void theArtOfThinking() {
+
+    }
+
+    @GetMapping("/about/keyGENIE/main")
+    public void keyGENIE() {
+
+    }
+
     @GetMapping("/contacts/main")
     public void contacts() {
 
