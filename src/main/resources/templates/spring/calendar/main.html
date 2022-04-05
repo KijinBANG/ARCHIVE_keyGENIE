@@ -151,33 +151,33 @@
                             return monthNameLong + " " + year;
                         }
 
-                        $('.prev').on('click', function () {
-                            calendar.prev();
-                            console.log(calendar.getDate());
-                            let dateObj = calendar.getDate();
-                            $('#displayedDate').text(getTitle(dateObj));
-                        });
-                        $('.next').on('click', function () {
-                            calendar.next();
-                            console.log(calendar.getDate());
-                            let dateObj = calendar.getDate();
-                            $('#displayedDate').text(getTitle(dateObj));
-                        });
-                        $('.today').on('click', function () {
-                            calendar.today();
-                            console.log(calendar.getDate());
-                            let dateObj = calendar.getDate();
-                            $('#displayedDate').text(getTitle(dateObj));
-                        });
-                        $('.gotoDate').on('click', function () {
-                            var gotoDate = $('input[name="gotoDate"]');
-                            console.log("type: ", typeof (gotoDate.val()));//
-                            gotoDate = gotoDate.val();
-                            gotoDate = new Date(gotoDate);
-                            console.log("type: ", typeof (gotoDate));//
-                            calendar.gotoDate(gotoDate);
-                            $('#displayedDate').text(getTitle(gotoDate));
-                        });
+                        // $('.prev').on('click', function () {
+                        //     calendar.prev();
+                        //     console.log(calendar.getDate());
+                        //     let dateObj = calendar.getDate();
+                        //     $('#displayedDate').text(getTitle(dateObj));
+                        // });
+                        // $('.next').on('click', function () {
+                        //     calendar.next();
+                        //     console.log(calendar.getDate());
+                        //     let dateObj = calendar.getDate();
+                        //     $('#displayedDate').text(getTitle(dateObj));
+                        // });
+                        // $('.today').on('click', function () {
+                        //     calendar.today();
+                        //     console.log(calendar.getDate());
+                        //     let dateObj = calendar.getDate();
+                        //     $('#displayedDate').text(getTitle(dateObj));
+                        // });
+                        // $('.gotoDate').on('click', function () {
+                        //     var gotoDate = $('input[name="gotoDate"]');
+                        //     console.log("type: ", typeof (gotoDate.val()));//
+                        //     gotoDate = gotoDate.val();
+                        //     gotoDate = new Date(gotoDate);
+                        //     console.log("type: ", typeof (gotoDate));//
+                        //     calendar.gotoDate(gotoDate);
+                        //     $('#displayedDate').text(getTitle(gotoDate));
+                        // });
                         $.getJSON("/spring/calendar/list", function (arr) {
                             for (var i in arr) {
                                 calendar.addEvent(arr[i]);
@@ -241,7 +241,8 @@
                                 inputLocation.val("");
                                 $(".removeBtn, .modifyBtn").hide();
                                 $(".planSaveBtn").show();
-                                $('.planModal').modal('show');
+                                // $('.planModal').modal('show');
+                                planModal.modal('show');
 
                                 $(".planSaveBtn").off('click').on("click", function () {
                                     var data = {
@@ -272,8 +273,9 @@
                                     } else {
                                         alert("Title 에 내용을 입력 하여 주세요.")
                                     }
+                                    // $('.planModal').modal('hide');
+                                    planModal.modal('hide');
                                 });
-                                $('.planModal').modal('hide');
                                 calendar.unselect()
                             },
                             eventClick: function (arg) {
@@ -289,7 +291,7 @@
                                 });
                                 $(".planSaveBtn").hide();
                                 $(".removeBtn, .modifyBtn").show();
-                                $('.planModal').modal('show');
+                                planModal.modal('show');
 
                                 $('.modifyBtn').off('click').on("click", function () {
                                     let end = timeToString(arg.event.start);
@@ -323,7 +325,7 @@
                                                 calendar.addEvent(JSON.parse(result));
                                             }
                                         });
-                                        $('.planModal').modal('hide');
+                                        planModal.modal('hide');
                                     } else {
                                         alert("Title 에 내용을 입력 하여 주세요.")
                                     }
@@ -346,14 +348,14 @@
                                             }
                                         })
                                     }
-                                    $('.planModal').modal('hide');
+                                    planModal.modal('hide');
                                 });
                             },
                             editable: true,
                             dayMaxEvents: true, // allow "more" link when too many events
                         });
-                        let dateObj = calendar.getDate();
-                        $('#displayedDate').text(getTitle(dateObj));
+                        // let dateObj = calendar.getDate();
+                        // $('#displayedDate').text(getTitle(dateObj));
                         calendar.render();
 
                     </script>
