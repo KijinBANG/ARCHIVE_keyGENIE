@@ -109,12 +109,13 @@ public class MemberOAuthUserService extends DefaultOAuth2UserService {
                 member.getRoleSet().stream().map(role ->
                                 new SimpleGrantedAuthority("ROLE_" + role.name()))
                         .collect(Collectors.toList()),
-                oAuth2User.getAttributes()
+                oAuth2User.getAttributes(),
+                member.getNickname()
         );
         log.info("authMember: " + authMember);
-        authMember.setEmail(member.getEmail());
-        authMember.setNickname(member.getNickname());
-        authMember.setFromSocial(member.isFromSocial());
+        //authMember.setEmail(member.getEmail());
+        //authMember.setNickname(member.getNickname());
+        //authMember.setFromSocial(member.isFromSocial());
         log.info("authMember_SET: " + authMember);
         return authMember;
     }

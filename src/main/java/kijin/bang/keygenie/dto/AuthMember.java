@@ -26,12 +26,16 @@ public class AuthMember extends User implements OAuth2User {
 
     public AuthMember(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
+        log.info("1111#$%^&^%$");
         this.email = username;
         this.password = password;
     }
 
-    public AuthMember(String username, String password, Collection<? extends GrantedAuthority> authorities, Map<String, Object> attr) {
+    public AuthMember(String username, String password, Collection<? extends GrantedAuthority> authorities, Map<String, Object> attr, String nickname) {
         super(username, password, authorities);
+        setEmail(username);
+        setNickname(nickname);
+        log.info("2222#$%^&^%$");
         this.attr = attr;
     }
 
