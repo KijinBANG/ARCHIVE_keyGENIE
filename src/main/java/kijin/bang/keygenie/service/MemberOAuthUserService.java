@@ -112,11 +112,11 @@ public class MemberOAuthUserService extends DefaultOAuth2UserService {
                 oAuth2User.getAttributes(),
                 member.getNickname()
         );
-        log.info("authMember: " + authMember);
+//        log.info("authMember: " + authMember);
         //authMember.setEmail(member.getEmail());
         //authMember.setNickname(member.getNickname());
         //authMember.setFromSocial(member.isFromSocial());
-        log.info("authMember_SET: " + authMember);
+//        log.info("authMember_SET: " + authMember);
         return authMember;
     }
 
