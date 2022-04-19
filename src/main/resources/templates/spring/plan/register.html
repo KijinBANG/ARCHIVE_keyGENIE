@@ -173,8 +173,7 @@
                                 dataType: 'text',
                                 type: 'POST',
                                 success: function (result) {
-                                    alert(result);
-
+                                    console.log(result);
                                     targetLi.remove();
                                 }
                             }); //$.ajax
@@ -192,7 +191,7 @@
                                 var target = $(obj);
                                 var temp = 'imageDTOList[' + i + '].imgName';
                                 str += "<input type='hidden' " + "name=\'" + temp + "\' " + "value=\'" + target.data('name') + "\'>";
-                                alert(str);
+                                console.log(str);
 
                                 temp = 'imageDTOList[' + i + '].path';
                                 str += "<input type='hidden' " + "name=\'" + temp + "\' " + "value=\'" + target.data('path') + "\'>";

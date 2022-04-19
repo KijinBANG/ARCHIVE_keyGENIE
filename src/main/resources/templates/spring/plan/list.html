@@ -9,6 +9,14 @@
             <div th:replace="~{layout/spring :: side}"></div>
             <div id="page-content-wrapper">
                 <div th:replace="~{layout/spring :: nav}"></div>
+
+                <style>
+                    .uploadResult ul li img {
+                        width: 100px;
+                        border-radius: 12px;
+                    }
+                </style>
+
                 <div class="container-fluid">
 
                     <h1 class="mt-4">Plan List
@@ -30,7 +38,7 @@
                         </thead>
                         <tbody>
                         <tr th:each="dto : ${result.dtoList}">
-                            [[${dto}]]<br><br>
+<!--                            [[${dto}]]<br><br>-->
 <!--                            [[${dto.id}]]<br><br>-->
 <!--                            [[${result.page}]]<br><br>-->
                             <th scope="row">
