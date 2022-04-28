@@ -83,6 +83,13 @@
                     </div>
                 </div>
 
+                <div>
+                    챗봇을 이용 해 보세요.<br />
+                    <input type="text" id="question">
+                    <input type="button" id="chatbotbtn" value="챗봇 전송"/>
+
+                </div>
+
                 <div class="footer px-4">
                     <p>
                         Copyright &copy;<script>document.write(new Date().getFullYear());</script>
@@ -126,6 +133,22 @@
             });
 
         })(jQuery);
+
+        window.addEventListener("load", function (e) {
+            var question = document.getElementById("question");
+            var chatbotbtn = document.getElementById("chatbotbtn");
+            chatbotbtn.addEventListener('click', function (e) {
+                var request;
+                request = new XMLHttpRequest();
+                var queryString = "chatbot?question=" + question.value;
+                request.open('GET', queryString, true);
+                request.send('');
+                request.addEventListener('load', function () {
+                    alert(JSON.parse(request.responseText).answer);
+                });
+            });
+        });
+
     </script>
 
     </body>
